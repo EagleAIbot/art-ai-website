@@ -96,55 +96,7 @@ body {
   overflow: hidden;
 }
 
-/* Grid lines behind hero */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 80px 80px;
-  z-index: 0;
-}
-
-.hero-bg-shapes {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-}
-
-.shape-1 {
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(120, 80, 255, 0.35) 0%, transparent 70%);
-  top: -200px;
-  right: -150px;
-}
-
-.shape-2 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 180, 255, 0.2) 0%, transparent 70%);
-  bottom: -150px;
-  left: -100px;
-}
-
-.shape-3 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 100, 150, 0.12) 0%, transparent 70%);
-  top: 40%;
-  left: 40%;
-  transform: translate(-50%, -50%);
-}
+/* Three.js canvas sits absolutely inside .hero */
 
 .hero-container {
   max-width: 1000px;
@@ -152,6 +104,12 @@ body {
   position: relative;
   z-index: 1;
   color: #ffffff;
+  pointer-events: none;
+}
+
+.hero-container a,
+.hero-container button {
+  pointer-events: auto;
 }
 
 .hero-title {
