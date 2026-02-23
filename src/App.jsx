@@ -1,17 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
-  Sparkles, 
-  Brain, 
-  Zap, 
   ArrowRight, 
   Mail, 
-  Phone, 
   MapPin,
-  CheckCircle2,
-  Cpu,
-  TrendingUp,
-  Shield
+  CheckCircle2
 } from 'lucide-react'
 import './App.css'
 
@@ -26,8 +19,6 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // For now, just show success message
-    // In production, this would send to a backend/API
     setFormSubmitted(true)
     console.log('Form submitted:', formData)
   }
@@ -41,139 +32,156 @@ function App() {
 
   const services = [
     {
-      icon: Brain,
-      title: "AI Strategy & Consulting",
-      description: "Transform your business with intelligent AI solutions tailored to your needs",
-      color: "#8B5CF6"
+      number: "01",
+      title: "AI Strategy",
+      description: "Strategic consulting to integrate AI solutions that align with your business objectives and drive measurable outcomes."
     },
     {
-      icon: Cpu,
-      title: "Custom AI Development",
-      description: "Build powerful AI products from concept to deployment with cutting-edge technology",
-      color: "#3B82F6"
+      number: "02",
+      title: "Product Development",
+      description: "End-to-end development of AI products and solutions, from initial concept through deployment and beyond."
     },
     {
-      icon: TrendingUp,
-      title: "AI Optimization",
-      description: "Reduce costs and maximize efficiency with intelligent automation and optimization",
-      color: "#10B981"
+      number: "03",
+      title: "Process Optimization",
+      description: "Intelligent automation and optimization strategies that reduce operational costs while increasing efficiency."
     }
-  ]
-
-  const benefits = [
-    { icon: Zap, text: "Lightning-fast implementation" },
-    { icon: TrendingUp, text: "High margins, low costs" },
-    { icon: Shield, text: "Enterprise-grade security" },
-    { icon: Sparkles, text: "Cutting-edge AI technology" }
   ]
 
   return (
     <div className="app">
+      {/* Navigation */}
+      <nav className="nav">
+        <div className="nav-container">
+          <div className="nav-logo">Art AI</div>
+          <a href="#contact" className="nav-cta">Let's Talk</a>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="hero">
-        <motion.div 
-          className="hero-content"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+        <div className="hero-container">
           <motion.div
-            className="logo-badge"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <Sparkles className="logo-icon" />
-            <span>Art AI</span>
+            <h1 className="hero-title">
+              We build AI products<br />
+              that work
+            </h1>
           </motion.div>
 
-          <h1 className="hero-title">
-            Building Tomorrow's
-            <span className="gradient-text"> AI Solutions</span>
-            <br />
-            Today
-          </h1>
-
-          <p className="hero-subtitle">
-            We craft intelligent AI products and solutions that keep your costs low and margins high.
-            <br />
-            Transform your business with cutting-edge artificial intelligence.
-          </p>
-
-          <motion.div 
-            className="hero-buttons"
+          <motion.p
+            className="hero-subtitle"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <a href="#contact" className="btn btn-primary">
-              Get Started <ArrowRight size={20} />
-            </a>
-            <a href="#services" className="btn btn-secondary">
-              Our Services
+            Keeping costs low. Margins high. Results exceptional.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <a href="#contact" className="hero-cta">
+              Start a Project <ArrowRight size={18} />
             </a>
           </motion.div>
-
-          <motion.div 
-            className="benefits-grid"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            {benefits.map((benefit, index) => (
-              <div key={index} className="benefit-item">
-                <benefit.icon size={18} className="benefit-icon" />
-                <span>{benefit.text}</span>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        <div className="hero-bg-gradient"></div>
+        </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="services">
-        <div className="container">
+      <section className="services">
+        <div className="services-container">
           <motion.div
-            className="section-header"
+            className="services-header"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="section-title">What We Do</h2>
-            <p className="section-subtitle">
-              Comprehensive AI solutions designed to accelerate your business growth
-            </p>
+            <h2 className="services-title">What we do</h2>
           </motion.div>
 
-          <div className="services-grid">
+          <div className="services-list">
             {services.map((service, index) => (
               <motion.div
                 key={index}
-                className="service-card"
+                className="service-item"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
               >
-                <div className="service-icon" style={{ background: `${service.color}15` }}>
-                  <service.icon size={32} color={service.color} />
+                <div className="service-number">{service.number}</div>
+                <div className="service-content">
+                  <h3 className="service-title">{service.title}</h3>
+                  <p className="service-description">{service.description}</p>
                 </div>
-                <h3 className="service-title">{service.title}</h3>
-                <p className="service-description">{service.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="stats">
+        <div className="stats-container">
+          <motion.div
+            className="stat-item"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="stat-value">Dubai</div>
+            <div className="stat-label">Based in the UAE</div>
+          </motion.div>
+
+          <motion.div
+            className="stat-item"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <div className="stat-value">Global</div>
+            <div className="stat-label">Working worldwide</div>
+          </motion.div>
+
+          <motion.div
+            className="stat-item"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="stat-value">2026</div>
+            <div className="stat-label">Building the future</div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="contact">
-        <div className="container">
-          <div className="contact-wrapper">
+        <div className="contact-container">
+          <motion.div
+            className="contact-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="contact-title">Let's build something</h2>
+            <p className="contact-subtitle">
+              Ready to transform your business with AI?
+            </p>
+          </motion.div>
+
+          <div className="contact-content">
             <motion.div
               className="contact-info"
               initial={{ opacity: 0, x: -20 }}
@@ -181,40 +189,19 @@ function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="contact-title">Let's Build Something Amazing</h2>
-              <p className="contact-subtitle">
-                Ready to transform your business with AI? Get in touch and let's discuss how we can help.
-              </p>
-
-              <div className="contact-details">
-                <div className="contact-item">
-                  <Mail className="contact-icon" />
-                  <div>
-                    <div className="contact-label">Email</div>
-                    <a href="mailto:hello@artai.com" className="contact-link">hello@artai.com</a>
-                  </div>
-                </div>
-
-                <div className="contact-item">
-                  <MapPin className="contact-icon" />
-                  <div>
-                    <div className="contact-label">Location</div>
-                    <div className="contact-value">Dubai, UAE</div>
-                  </div>
-                </div>
+              <div className="contact-item">
+                <Mail size={20} />
+                <a href="mailto:hello@artai.com">hello@artai.com</a>
               </div>
 
-              <div className="contact-cta">
-                <Brain className="cta-icon" />
-                <div>
-                  <div className="cta-title">AI-Powered Solutions</div>
-                  <div className="cta-text">Low costs. High margins. Exceptional results.</div>
-                </div>
+              <div className="contact-item">
+                <MapPin size={20} />
+                <span>Dubai, UAE</span>
               </div>
             </motion.div>
 
             <motion.div
-              className="contact-form-wrapper"
+              className="contact-form-container"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -222,79 +209,77 @@ function App() {
             >
               {!formSubmitted ? (
                 <form className="contact-form" onSubmit={handleSubmit}>
-                  <div className="form-group">
-                    <label htmlFor="name">Name *</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="Your full name"
-                    />
+                  <div className="form-row">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        placeholder="Name"
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        placeholder="Email"
+                      />
+                    </div>
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="email">Email *</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="your.email@company.com"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="company">Company</label>
                     <input
                       type="text"
                       id="company"
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      placeholder="Your company name"
+                      placeholder="Company"
                     />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="message">Message *</label>
                     <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       required
-                      rows="5"
-                      placeholder="Tell us about your project..."
+                      rows="6"
+                      placeholder="Tell us about your project"
                     ></textarea>
                   </div>
 
-                  <button type="submit" className="btn btn-primary btn-full">
-                    Send Message <ArrowRight size={20} />
+                  <button type="submit" className="form-submit">
+                    Send Message <ArrowRight size={18} />
                   </button>
                 </form>
               ) : (
                 <motion.div
                   className="form-success"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 200 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
                 >
-                  <CheckCircle2 className="success-icon" size={64} />
-                  <h3>Thank You!</h3>
-                  <p>We've received your message and will get back to you within 24 hours.</p>
-                  <button 
+                  <CheckCircle2 size={48} />
+                  <h3>Message received</h3>
+                  <p>We'll get back to you within 24 hours.</p>
+                  <button
                     onClick={() => {
                       setFormSubmitted(false)
                       setFormData({ name: '', email: '', company: '', message: '' })
                     }}
-                    className="btn btn-secondary"
+                    className="form-reset"
                   >
-                    Send Another Message
+                    Send another message
                   </button>
                 </motion.div>
               )}
@@ -305,16 +290,9 @@ function App() {
 
       {/* Footer */}
       <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-brand">
-              <Sparkles className="footer-logo" />
-              <span>Art AI</span>
-            </div>
-            <p className="footer-text">
-              © 2026 Art AI. Building the future with artificial intelligence.
-            </p>
-          </div>
+        <div className="footer-container">
+          <div className="footer-logo">Art AI</div>
+          <p className="footer-text">© 2026 — Building the future with AI</p>
         </div>
       </footer>
     </div>
