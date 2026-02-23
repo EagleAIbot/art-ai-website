@@ -161,11 +161,14 @@ function App() {
         <StatsScene />
         <div className="stats-container">
           {[
-            { value: "Dubai", label: "Based in the UAE" },
-            { value: "Global", label: "Working worldwide" },
-            { value: "2026", label: "Building the future" },
+            { value: "4×", label: "Average cost reduction vs traditional agencies" },
+            { value: "< 4wks", label: "From brief to live product" },
+            { value: "UAE", label: "Incorporated in Dubai — tax efficient, globally billed" },
+            { value: "24/7", label: "AI systems that work while you sleep" },
+            { value: "100%", label: "Founder-led — you talk to the people building it" },
+            { value: "GPT-4o +", label: "Using the world's most advanced AI models" },
           ].map((s, i) => (
-            <motion.div key={i} className="stat-item" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}>
+            <motion.div key={i} className="stat-item" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.08 }}>
               <div className="stat-value">{s.value}</div>
               <div className="stat-label">{s.label}</div>
             </motion.div>

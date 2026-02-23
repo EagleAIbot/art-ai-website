@@ -500,39 +500,48 @@ body {
 /* 3D canvas fills this section */
 
 .stats-container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+  gap: 1px;
   position: relative;
   z-index: 1;
   pointer-events: none;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .stat-item {
-  text-align: center;
-  padding: 4rem 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+  padding: 3.5rem;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(10px);
   transition: background 0.3s ease;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .stat-item:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(124, 58, 237, 0.08);
 }
 
 .stat-value {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
   margin-bottom: 0.75rem;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   color: #ffffff;
+  line-height: 1;
 }
 
 .stat-label {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 0;
+  line-height: 1.5;
+  max-width: 200px;
 }
 
 /* ─── Process ────────────────────────────────────── */
@@ -962,8 +971,7 @@ body {
   }
 
   .stats-container {
-    grid-template-columns: 1fr;
-    gap: 0;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .contact-content {
@@ -1039,8 +1047,12 @@ body {
     padding: 2rem 0;
   }
 
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+
   .stat-item {
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1.5rem;
   }
 
   .contact-form-container {
