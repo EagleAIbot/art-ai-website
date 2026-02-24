@@ -1,46 +1,43 @@
-# Art AI Website
+# Shift AI Website
 
-> Building Tomorrow's AI Solutions Today
+> Custom models. Full products. Total automation.
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 npm install
 npm run dev
 ```
 
-## 📦 Build
+## Build
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## 🌐 Deployment
+## Environment Variables
 
-This site is automatically deployed to GitHub Pages on every push to the main branch.
+Copy `.env.example` to `.env.local` and fill in:
 
-## 🎨 Features
+```
+VITE_FORMSPREE_ID=your_formspree_form_id
+```
 
-- Modern AI-focused design with gradient aesthetics
-- Fully responsive (mobile-first)
-- Contact form with validation
-- Smooth animations with Framer Motion
-- Professional services showcase
-- Fast loading (Vite build)
+## Deployment
 
-## 🛠️ Tech Stack
+Automatically deployed to GitHub Pages on every push to main. Custom domain: shiftaitech.com
+
+## Tech Stack
 
 - React 18
 - Vite 5
-- Framer Motion
+- Framer Motion + GSAP
+- Three.js (3D hero/stats scenes)
+- Lenis (smooth scroll)
 - Lucide React (icons)
 - GitHub Pages
 
-## 📧 Contact
+## Contact
 
-For inquiries: hello@artai.com
-
----
-
-Built with AI ✨
+hello@shiftaitech.com
