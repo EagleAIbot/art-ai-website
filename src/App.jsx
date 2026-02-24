@@ -426,7 +426,7 @@ function App() {
             <motion.div className="contact-info" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
               <div className="contact-item">
                 <Mail size={20} />
-                <a href="mailto:hello@shiftaitech.com">hello@shiftaitech.com</a>
+                <a href="mailto:jack@shiftaitech.com">jack@shiftaitech.com</a>
               </div>
               <div className="contact-item">
                 <MapPin size={20} />
@@ -458,7 +458,7 @@ function App() {
                     {formLoading ? 'Sending…' : <><span>Send Message</span> <ArrowRight size={18} /></>}
                   </button>
                   {formError && (
-                    <p className="form-error">Something went wrong. Please email us directly at <a href="mailto:hello@shiftaitech.com">hello@shiftaitech.com</a></p>
+                    <p className="form-error">Something went wrong. Please email us directly at <a href="mailto:jack@shiftaitech.com">jack@shiftaitech.com</a></p>
                   )}
                 </form>
               ) : (
