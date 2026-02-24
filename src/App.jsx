@@ -160,7 +160,7 @@ function App() {
               <circle cx="30" cy="16" r="1.5" fill="#a855f7" opacity="0.9"/>
               <circle cx="16" cy="2"  r="1.2" fill="#06b6d4" opacity="0.8"/>
             </svg>
-            <span className="nav-logo-text">Shift AI</span>
+            <span className="nav-logo-text">Shift AI Tech</span>
           </div>
           <a href="#contact" className="nav-cta">Let's Talk</a>
         </div>
@@ -349,7 +349,7 @@ function App() {
       <section className="why-us">
         <div className="why-us-container">
           <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <p className="section-label">Why Shift AI</p>
+            <p className="section-label">Why Shift AI Tech</p>
             <h2 className="section-title">We're different</h2>
           </motion.div>
           <div className="why-grid">
@@ -479,8 +479,8 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="footer-container">
-          <div className="footer-logo">Shift AI</div>
-          <p className="footer-text">© 2026 Shift AI — United Kingdom</p>
+          <div className="footer-logo">Shift AI Tech</div>
+          <p className="footer-text">© 2026 Shift AI Tech — United Kingdom</p>
         </div>
       </footer>
 
