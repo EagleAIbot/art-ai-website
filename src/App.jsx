@@ -139,6 +139,37 @@ function App() {
     "OpenAI API", "Anthropic API", "Polygon.io", "Refinitiv", "QuantLib",
   ]
 
+  const portfolio = [
+    {
+      sector: "Crypto Markets",
+      partner: "Eagle AI Labs",
+      description: "AI price prediction models and market simulators built for crypto asset traders. Real-time inference on live order book data.",
+      tags: ["Price Prediction", "Market Simulation", "Real-time AI"],
+      accent: "#a855f7",
+    },
+    {
+      sector: "Financial Markets",
+      partner: "FX · Agriculture · Oil & Gas · Gold",
+      description: "Multi-asset intelligence across traditional commodity and currency markets. Signal detection, risk modelling, and execution automation.",
+      tags: ["FX", "Commodities", "Algo Trading"],
+      accent: "#06b6d4",
+    },
+    {
+      sector: "Sports",
+      partner: "Pitch Predict",
+      description: "AI-generated betting odds and outcome predictions for European football. Probabilistic modelling across leagues, form, and live match data.",
+      tags: ["Football AI", "Odds Generation", "Predictive Models"],
+      accent: "#10b981",
+    },
+    {
+      sector: "Learning & Development",
+      partner: "Commodity Partners",
+      description: "Accredited AI learning and development courses. We built the AI-powered course platform and content delivery system.",
+      tags: ["Accredited Courses", "AI Platform", "L&D Tech"],
+      accent: "#f59e0b",
+    },
+  ]
+
   const financeCapabilities = [
     {
       icon: TrendingUp,
@@ -222,10 +253,10 @@ function App() {
         <HeroScene />
         <div className="hero-container">
           <div className="hero-title-wrap">
-            <h1 className="hero-title">We build AI products<br />that work</h1>
+            <h1 className="hero-title">Proven Hyper Agile<br />AI Solutions.</h1>
           </div>
           <p className="hero-subtitle">
-            AI built for financial markets and beyond.<br />Custom models, trading systems, and full automation.
+            We build AI products using AI tools — making us faster, leaner,<br />and more responsive than 80% of technology firms.
           </p>
           <div className="hero-cta-wrap">
             <a href="#contact" className="hero-cta">Start a Project <ArrowRight size={18} /></a>
@@ -241,6 +272,51 @@ function App() {
           ))}
         </div>
       </div>
+
+      {/* ── 20% Differentiator Band ──────────────────── */}
+      <section className="differentiator-band">
+        <div className="differentiator-container">
+          <motion.div className="differentiator-stat" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <span className="differentiator-number">20%</span>
+            <p className="differentiator-text">of technology firms build AI products using AI tools. We're one of them.</p>
+          </motion.div>
+          <div className="differentiator-divider" />
+          <motion.div className="differentiator-pillars" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
+            {["Hyper Agile", "Income Generating", "Time Saving", "Cost Reducing"].map((p, i) => (
+              <div key={i} className="differentiator-pill">{p}</div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Portfolio of Projects & Partners ─────────── */}
+      <section className="portfolio-section">
+        <div className="portfolio-container">
+          <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <p className="section-label">Proven track record</p>
+            <h2 className="section-title">Portfolio of Projects &amp; Partners</h2>
+            <p className="portfolio-intro">
+              We are market agnostic. Proven solutions across financial markets, sports, and learning &amp; development.
+            </p>
+          </motion.div>
+          <div className="portfolio-grid">
+            {portfolio.map((p, i) => (
+              <motion.div key={i} className="portfolio-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}>
+                <div className="portfolio-card-top">
+                  <span className="portfolio-sector" style={{ color: p.accent, borderColor: p.accent + '33', background: p.accent + '11' }}>{p.sector}</span>
+                </div>
+                <h3 className="portfolio-partner">{p.partner}</h3>
+                <p className="portfolio-desc">{p.description}</p>
+                <div className="portfolio-tags">
+                  {p.tags.map((t, j) => (
+                    <span key={j} className="portfolio-tag">{t}</span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── Financial Markets ────────────────────────── */}
       <section id="markets" className="finance-section">
@@ -432,14 +508,14 @@ function App() {
         <div className="why-us-container">
           <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <p className="section-label">Why Shift AI Tech</p>
-            <h2 className="section-title">We're different</h2>
+            <h2 className="section-title">This is why we're different</h2>
           </motion.div>
           <div className="why-grid">
             {[
-              { title: "UK-based, founder-run", desc: "We're a small UK team. When you contact us, you talk to the person who'll actually do the work. No handoffs, no account managers." },
-              { title: "We build the full stack", desc: "Custom models, automations, voice agents, full products, local business tools. We do all of it. You don't need five different agencies." },
-              { title: "Costs you'll actually like", desc: "We build lean. No enterprise bloat, no inflated margins. Pay per project, keep the value." },
-              { title: "Speed is the product", desc: "We've shipped working AI systems in days. When you need to move fast, we move fast." },
+              { title: "We build AI using AI", desc: "Only 20% of technology firms build AI products using AI tools. We're in that 20%. It means we move faster, iterate quicker, and pass the cost savings directly to you." },
+              { title: "Hyper agile by design", desc: "No legacy processes. No bloated teams. We're structured to move at the speed of the market — from brief to working product in weeks, not quarters." },
+              { title: "We save you time and money", desc: "Friction-free development spend. Everything is scoped, priced, and delivered with zero waste. You pay for results, not hours." },
+              { title: "Market agnostic", desc: "We provide proven solutions across financial markets, sports, and learning & development. If there's data and a problem, we can build the AI." },
             ].map((w, i) => (
               <motion.div key={i} className="why-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}>
                 <div className="why-dot" />
