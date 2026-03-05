@@ -15,7 +15,15 @@ import {
   FileText,
   Workflow,
   Phone,
-  Database
+  Database,
+  TrendingUp,
+  Activity,
+  Shield,
+  LineChart,
+  AlertTriangle,
+  Cpu,
+  Globe,
+  Layers
 } from 'lucide-react'
 import HeroScene from './HeroScene'
 import StatsScene from './StatsScene'
@@ -127,8 +135,51 @@ function App() {
 
   const techStack = [
     "GPT-4o", "Claude 3.5", "Gemini 2.0", "Llama 3", "Mistral",
-    "LangChain", "Pinecone", "Supabase", "Vercel", "AWS",
-    "OpenAI API", "Anthropic API", "Whisper", "DALL·E 3", "Midjourney",
+    "LangChain", "Pinecone", "Bloomberg API", "Alpaca", "Interactive Brokers",
+    "OpenAI API", "Anthropic API", "Polygon.io", "Refinitiv", "QuantLib",
+  ]
+
+  const financeCapabilities = [
+    {
+      icon: TrendingUp,
+      title: "Algorithmic Trading Systems",
+      desc: "Custom algo strategies built and backtested on real market data. Execution automation across equities, FX, crypto, and derivatives."
+    },
+    {
+      icon: Activity,
+      title: "Signal Detection & Alpha Generation",
+      desc: "ML models that scan price action, order flow, and alternative data to surface tradeable signals before they become obvious."
+    },
+    {
+      icon: AlertTriangle,
+      title: "Risk Modelling & Position Sizing",
+      desc: "Real-time portfolio risk engines. VAR, drawdown limits, correlation matrices, and automated position management."
+    },
+    {
+      icon: LineChart,
+      title: "Market Sentiment Analysis",
+      desc: "NLP pipelines that process news, earnings calls, social media, and analyst reports to quantify market sentiment in real time."
+    },
+    {
+      icon: FileText,
+      title: "Regulatory Intelligence (RegTech)",
+      desc: "AI that monitors regulatory feeds, flags compliance risks, and drafts reports. Built for MiFID II, FCA, and ESMA frameworks."
+    },
+    {
+      icon: Database,
+      title: "Market Data Pipelines",
+      desc: "High-throughput ingestion and structuring of tick data, order books, and alternative datasets. Clean data feeds your models can actually trust."
+    },
+    {
+      icon: Cpu,
+      title: "Quant Research Automation",
+      desc: "Automate the research cycle — hypothesis generation, backtesting, parameter optimisation, and reporting — so your team ships strategies faster."
+    },
+    {
+      icon: Globe,
+      title: "Multi-Asset Intelligence Platforms",
+      desc: "Unified dashboards and AI assistants that synthesise data across asset classes, portfolios, and geographies into a single view."
+    },
   ]
 
   return (
@@ -174,7 +225,7 @@ function App() {
             <h1 className="hero-title">We build AI products<br />that work</h1>
           </div>
           <p className="hero-subtitle">
-            Custom models. Full products. Total automation.<br />Whatever AI you need, we build it.
+            AI built for financial markets and beyond.<br />Custom models, trading systems, and full automation.
           </p>
           <div className="hero-cta-wrap">
             <a href="#contact" className="hero-cta">Start a Project <ArrowRight size={18} /></a>
@@ -190,6 +241,37 @@ function App() {
           ))}
         </div>
       </div>
+
+      {/* ── Financial Markets ────────────────────────── */}
+      <section id="markets" className="finance-section">
+        <div className="finance-container">
+          <motion.div className="finance-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <p className="section-label finance-label">Core Speciality</p>
+            <h2 className="finance-title">Built for financial markets</h2>
+            <p className="finance-subtitle">
+              Financial markets are our home ground. We build AI systems that trade, analyse, predict, and report — 
+              with the rigour that regulated markets demand and the speed that gives you edge.
+            </p>
+          </motion.div>
+
+          <div className="finance-grid">
+            {financeCapabilities.map((cap, i) => (
+              <motion.div key={i} className="finance-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }}>
+                <div className="finance-card-icon">
+                  <cap.icon size={22} strokeWidth={1.5} />
+                </div>
+                <h3 className="finance-card-title">{cap.title}</h3>
+                <p className="finance-card-desc">{cap.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div className="finance-cta-row" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
+            <a href="#contact" className="finance-cta-btn">Discuss a markets project <ArrowRight size={18} /></a>
+            <span className="finance-cta-note">Equities · FX · Crypto · Derivatives · Fixed Income</span>
+          </motion.div>
+        </div>
+      </section>
 
       {/* ── Services ─────────────────────────────────── */}
       <section id="services" className="services">
@@ -378,6 +460,12 @@ function App() {
           </motion.div>
           <div className="scenarios-grid">
             {[
+              {
+                type: "Financial markets",
+                problem: "A proprietary trading firm was manually reviewing news and earnings releases to inform short-term equity positions. The process was slow, inconsistent, and limited to what the team could physically read.",
+                built: "We built a real-time sentiment pipeline ingesting news feeds, SEC filings, and earnings call transcripts. An LLM scores each event by expected price impact and direction, feeding directly into their pre-trade screening workflow.",
+                outcome: "Analysis time cut from 40 minutes to under 90 seconds per event."
+              },
               {
                 type: "Local business",
                 problem: "A dental practice in Manchester had no online booking, a site that took 5 seconds to load on mobile, and three unanswered Google reviews. They had no idea how many enquiries they were losing.",
