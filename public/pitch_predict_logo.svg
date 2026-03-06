@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600" width="1600" height="1600">
+  <defs>
+    <radialGradient id="bgGlow" cx="85%" cy="15%" r="80%">
+      <stop offset="0%" stop-color="#0df06b" stop-opacity="0.22"/>
+      <stop offset="45%" stop-color="#0df06b" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#030811" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0b5c37"/>
+      <stop offset="50%" stop-color="#49e07b"/>
+      <stop offset="100%" stop-color="#0b5c37"/>
+    </linearGradient>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="24" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1600" fill="#040813"/>
+  <rect width="1600" height="1600" fill="url(#bgGlow)"/>
+
+  <circle cx="800" cy="800" r="765" fill="none" stroke="url(#ring)" stroke-width="38" filter="url(#softGlow)"/>
+  <circle cx="800" cy="800" r="765" fill="none" stroke="url(#ring)" stroke-width="38"/>
+
+  <!-- Left P -->
+  <g transform="translate(392 640) skewX(-10)">
+    <path fill="#f1f1f1" d="
+      M 40 320
+      L 92 20
+      Q 100 0 124 0
+      L 334 0
+      Q 406 0 436 44
+      Q 468 91 454 171
+      Q 438 261 375 311
+      Q 325 350 249 350
+      L 137 350
+      L 120 450
+      Q 114 480 84 480
+      L 32 480
+      Q 4 480 -1 456
+      Q -4 443 0 426
+      Z
+
+      M 150 248
+      L 257 248
+      Q 293 248 316 229
+      Q 340 209 348 168
+      Q 354 131 340 113
+      Q 326 94 293 94
+      L 176 94
+      Z"/>
+  </g>
+
+  <!-- Right P -->
+  <g transform="translate(820 640) skewX(-10)">
+    <path fill="#00f06d" d="
+      M 40 320
+      L 92 20
+      Q 100 0 124 0
+      L 334 0
+      Q 406 0 436 44
+      Q 468 91 454 171
+      Q 438 261 375 311
+      Q 325 350 249 350
+      L 137 350
+      L 120 450
+      Q 114 480 84 480
+      L 32 480
+      Q 4 480 -1 456
+      Q -4 443 0 426
+      Z
+
+      M 150 248
+      L 257 248
+      Q 293 248 316 229
+      Q 340 209 348 168
+      Q 354 131 340 113
+      Q 326 94 293 94
+      L 176 94
+      Z"/>
+  </g>
+</svg>

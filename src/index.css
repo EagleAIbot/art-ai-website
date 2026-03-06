@@ -42,7 +42,10 @@ html {
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: #050505;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(168, 85, 247, 0.14), transparent 45%),
+    radial-gradient(circle at 82% 30%, rgba(99, 102, 241, 0.12), transparent 45%),
+    linear-gradient(180deg, #f8fbff 0%, #eef3ff 60%, #f7f9ff 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,24 +54,27 @@ html {
 }
 
 .loading-icon {
-  animation: loading-spin 2.5s linear infinite;
-  filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.9));
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  animation: loading-pulse 1.6s ease-in-out infinite;
+  filter: drop-shadow(0 8px 20px rgba(139, 92, 246, 0.32));
 }
 
-@keyframes loading-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+@keyframes loading-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.92; }
+  50% { transform: scale(1.06); opacity: 1; }
 }
 
 .loading-label {
   font-size: 0.8rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  background: linear-gradient(90deg, #a855f7, #06b6d4);
+  background: linear-gradient(90deg, #a855f7, #4c1d95);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  opacity: 0.85;
+  opacity: 0.95;
 }
 
 /* Hide default cursor on desktop */
