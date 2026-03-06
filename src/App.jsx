@@ -30,6 +30,140 @@ import StatsScene from './StatsScene'
 import { CounterStat } from './components/CounterStat'
 import './App.css'
 
+function HeroEnergyOverlay() {
+  const canvasRef = useRef(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const particles = []
+    let rafId = 0
+    let width = 0
+    let height = 0
+    let dpr = 1
+
+    const createParticle = () => {
+      const angle = Math.random() * Math.PI * 2
+      const speed = 0.09 + Math.random() * 0.18
+      return {
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        radius: 1.4 + Math.random() * 2.2,
+        twinkle: Math.random() * Math.PI * 2,
+      }
+    }
+
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2)
+      width = canvas.clientWidth
+      height = canvas.clientHeight
+      canvas.width = Math.floor(width * dpr)
+      canvas.height = Math.floor(height * dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+
+      const targetCount = Math.max(30, Math.floor((width * height) / 30000))
+      const minSpacing = Math.min(95, Math.max(58, Math.min(width, height) * 0.085))
+      const nextParticles = []
+      let attempts = 0
+      const maxAttempts = targetCount * 45
+
+      while (nextParticles.length < targetCount && attempts < maxAttempts) {
+        const p = createParticle()
+        let valid = true
+        for (let i = 0; i < nextParticles.length; i++) {
+          const q = nextParticles[i]
+          if (Math.hypot(p.x - q.x, p.y - q.y) < minSpacing) {
+            valid = false
+            break
+          }
+        }
+        if (valid) nextParticles.push(p)
+        attempts++
+      }
+
+      while (nextParticles.length < targetCount) nextParticles.push(createParticle())
+      particles.length = 0
+      particles.push(...nextParticles)
+    }
+
+    const draw = (timeMs) => {
+      const t = timeMs * 0.001
+      ctx.clearRect(0, 0, width, height)
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i]
+        p.x += p.vx
+        p.y += p.vy
+        p.twinkle += 0.03
+
+        if (p.x < -24) p.x = width + 24
+        if (p.x > width + 24) p.x = -24
+        if (p.y < -24) p.y = height + 24
+        if (p.y > height + 24) p.y = -24
+      }
+
+      const maxDist = Math.min(300, width * 0.23)
+      for (let i = 0; i < particles.length; i++) {
+        const a = particles[i]
+        for (let j = i + 1; j < particles.length; j++) {
+          const b = particles[j]
+          const dx = a.x - b.x
+          const dy = a.y - b.y
+          const dist = Math.hypot(dx, dy)
+          if (dist > maxDist) continue
+
+          const energy = Math.max(0, 1 - dist / maxDist)
+          const pulse = 0.6 + 0.4 * Math.sin(t * 2.4 + (i + j) * 0.2)
+          const alpha = energy * energy * 0.68 * pulse
+          ctx.strokeStyle = `rgba(147, 51, 234, ${alpha})`
+          ctx.lineWidth = 0.55 + energy * 1.45
+          ctx.beginPath()
+          ctx.moveTo(a.x, a.y)
+          ctx.lineTo(b.x, b.y)
+          ctx.stroke()
+        }
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i]
+        const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 7.5)
+        glow.addColorStop(0, 'rgba(168, 85, 247, 0.93)')
+        glow.addColorStop(0.4, 'rgba(126, 34, 206, 0.54)')
+        glow.addColorStop(1, 'rgba(88, 28, 135, 0)')
+        ctx.fillStyle = glow
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.radius * 7.5, 0, Math.PI * 2)
+        ctx.fill()
+
+        const coreAlpha = 0.75 + 0.25 * Math.sin(p.twinkle)
+        ctx.fillStyle = `rgba(233, 213, 255, ${coreAlpha})`
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
+        ctx.fill()
+      }
+
+      rafId = requestAnimationFrame(draw)
+    }
+
+    resize()
+    rafId = requestAnimationFrame(draw)
+    window.addEventListener('resize', resize)
+
+    return () => {
+      cancelAnimationFrame(rafId)
+      window.removeEventListener('resize', resize)
+    }
+  }, [])
+
+  return <canvas ref={canvasRef} className="hero-energy-canvas" aria-hidden="true" />
+}
+
 function App() {
   const [scrolled, setScrolled] = useState(false)
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' })
@@ -54,6 +188,15 @@ function App() {
     const t2 = setTimeout(() => setFinished(), 1000)
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [sceneLoaded])
+
+  // Fallback so hero copy still appears even if 3D init lags.
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setAnimationsReady()
+      setFinished()
+    }, 2200)
+    return () => clearTimeout(t)
+  }, [setAnimationsReady, setFinished])
 
   // Hero text stagger — fires when animationsReady flips true
   const animationsReady = useAppStore((s) => s.animationsReady)
@@ -146,6 +289,10 @@ function App() {
       description: "AI price prediction models and market simulators built for crypto asset traders. Real-time inference on live order book data.",
       tags: ["Price Prediction", "Market Simulation", "Real-time AI"],
       accent: "#a855f7",
+      logoMark: "EAL",
+      logoPath: "/eai-logo.png",
+      quote: "Shift delivered a working model fast and kept iterating with us in live market conditions.",
+      reference: "Founder, Eagle AI Labs",
     },
     {
       sector: "Financial Markets",
@@ -153,6 +300,9 @@ function App() {
       description: "Multi-asset intelligence across traditional commodity and currency markets. Signal detection, risk modelling, and execution automation.",
       tags: ["FX", "Commodities", "Algo Trading"],
       accent: "#06b6d4",
+      logoMark: "MAI",
+      quote: "They translated a complex trading brief into a practical AI workflow that our team uses daily.",
+      reference: "Head of Trading Ops, Multi-Asset Desk",
     },
     {
       sector: "Sports",
@@ -160,6 +310,10 @@ function App() {
       description: "AI-generated betting odds and outcome predictions for European football. Probabilistic modelling across leagues, form, and live match data.",
       tags: ["Football AI", "Odds Generation", "Predictive Models"],
       accent: "#10b981",
+      logoMark: "PP",
+      logoPath: "/pitch_predict_logo.svg",
+      quote: "A different level of experience. We're live and ready for the FIFA World Cup.",
+      reference: "Matt Simpson, CEO",
     },
     {
       sector: "Learning & Development",
@@ -167,6 +321,9 @@ function App() {
       description: "Accredited AI learning and development courses. We built the AI-powered course platform and content delivery system.",
       tags: ["Accredited Courses", "AI Platform", "L&D Tech"],
       accent: "#f59e0b",
+      logoMark: "CP",
+      quote: "A rare team that balances technical depth with delivery speed and commercial focus.",
+      reference: "Director, Commodity Partners",
     },
   ]
 
@@ -220,40 +377,34 @@ function App() {
       <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
         <div className="nav-container">
           <div className="nav-logo">
-            {/* Orbital logomark */}
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="nav-logo-icon">
-              <defs>
-                <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#a855f7"/>
-                  <stop offset="100%" stopColor="#06b6d4"/>
-                </linearGradient>
-                <linearGradient id="lg2" x1="100%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#818cf8"/>
-                  <stop offset="100%" stopColor="#a855f7"/>
-                </linearGradient>
-              </defs>
-              {/* Outer orbital ring */}
-              <ellipse cx="16" cy="16" rx="14" ry="6" stroke="url(#lg1)" strokeWidth="1.2" fill="none" opacity="0.9"/>
-              {/* Inner orbital ring — tilted */}
-              <ellipse cx="16" cy="16" rx="6" ry="14" stroke="url(#lg2)" strokeWidth="1.2" fill="none" opacity="0.7"/>
-              {/* Centre node */}
-              <circle cx="16" cy="16" r="2.5" fill="url(#lg1)"/>
-              {/* Orbit dots */}
-              <circle cx="30" cy="16" r="1.5" fill="#a855f7" opacity="0.9"/>
-              <circle cx="16" cy="2"  r="1.2" fill="#06b6d4" opacity="0.8"/>
-            </svg>
-            <span className="nav-logo-text">Shift AI Tech</span>
+            <img
+              src="/logo-with-border.png"
+              alt="Shift AI Tech logo"
+              className="nav-logo-image"
+              onError={(e) => { e.currentTarget.src = '/vite.svg' }}
+            />
           </div>
-          <a href="#contact" className="nav-cta">Let's Talk</a>
+          <div className="nav-tabs">
+            <a href="#projects" className="nav-tab">Projects</a>
+            <a href="#solutions" className="nav-tab">Solutions</a>
+            <a href="/team" className="nav-tab">Team</a>
+            <a href="#work-with-us" className="nav-tab">Work With Us</a>
+            <a href="#contact" className="nav-tab">Contact</a>
+          </div>
+          <a href="#contact" className="nav-build-btn">Let's Build</a>
         </div>
       </nav>
 
       {/* ── Hero ─────────────────────────────────────── */}
       <section className="hero">
         <HeroScene />
+        <HeroEnergyOverlay />
         <div className="hero-container">
           <div className="hero-title-wrap">
-            <h1 className="hero-title">Proven Hyper Agile<br />AI Solutions.</h1>
+            <h1 className="hero-title">
+              <span className="hero-title-line hero-title-line--top">Proven <span className="hero-title-accent">Hyper Agile</span></span>
+              <span className="hero-title-line">AI Solutions.</span>
+            </h1>
           </div>
           <p className="hero-subtitle">
             We build AI products using AI tools — making us faster, leaner,<br />and more responsive than 80% of technology firms.
@@ -290,7 +441,13 @@ function App() {
       </section>
 
       {/* ── Portfolio of Projects & Partners ─────────── */}
-      <section className="portfolio-section">
+      <section id="projects" className="portfolio-section">
+        <div className="portfolio-polygons" aria-hidden="true">
+          <span className="poly-shape poly-shape-1" />
+          <span className="poly-shape poly-shape-2" />
+          <span className="poly-shape poly-shape-3" />
+          <span className="poly-shape poly-shape-4" />
+        </div>
         <div className="portfolio-container">
           <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <p className="section-label">Proven track record</p>
@@ -304,9 +461,20 @@ function App() {
               <motion.div key={i} className="portfolio-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}>
                 <div className="portfolio-card-top">
                   <span className="portfolio-sector" style={{ color: p.accent, borderColor: p.accent + '33', background: p.accent + '11' }}>{p.sector}</span>
+                  <div className="portfolio-logo-mark">
+                    {p.logoPath ? (
+                      <img src={p.logoPath} alt={`${p.partner} logo`} className="portfolio-logo-image" />
+                    ) : (
+                      p.logoMark
+                    )}
+                  </div>
                 </div>
                 <h3 className="portfolio-partner">{p.partner}</h3>
                 <p className="portfolio-desc">{p.description}</p>
+                <div className="portfolio-quote-wrap">
+                  <p className="portfolio-quote">"{p.quote}"</p>
+                  <p className="portfolio-reference">{p.reference}</p>
+                </div>
                 <div className="portfolio-tags">
                   {p.tags.map((t, j) => (
                     <span key={j} className="portfolio-tag">{t}</span>
@@ -350,7 +518,7 @@ function App() {
       </section>
 
       {/* ── Services ─────────────────────────────────── */}
-      <section id="services" className="services">
+      <section id="solutions" className="services">
         <div className="services-container">
           <motion.div className="services-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <p className="section-label">Services</p>
@@ -375,7 +543,7 @@ function App() {
         <div className="use-cases-container">
           <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <p className="section-label">What we build</p>
-            <h2 className="section-title">If it runs on AI, we build it</h2>
+            <h2 className="section-title">If it runs on AI, <span className="section-title-accent">we build it</span></h2>
           </motion.div>
           <div className="use-cases-grid">
             {useCases.map((u, i) => (
@@ -412,7 +580,7 @@ function App() {
       </section>
 
       {/* ── Process ──────────────────────────────────── */}
-      <section className="process">
+      <section id="work-with-us" className="process">
         <div className="process-container">
           <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <p className="section-label">How we work</p>
@@ -643,7 +811,15 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="footer-container">
-          <div className="footer-logo">Shift AI Tech</div>
+          <div className="footer-logo-wrap">
+            <img
+              src="/logo-with-border.png"
+              alt="Shift AI Tech logo"
+              className="footer-logo-image"
+              onError={(e) => { e.currentTarget.src = '/vite.svg' }}
+            />
+            <div className="footer-logo">Shift AI Tech</div>
+          </div>
           <p className="footer-text">© 2026 Shift AI Tech — United Kingdom</p>
         </div>
       </footer>
