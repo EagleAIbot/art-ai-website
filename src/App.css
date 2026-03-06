@@ -1732,27 +1732,64 @@ body {
 
 @media (max-width: 968px) {
   .nav-container {
-    padding: 0.3rem 0.7rem;
-    min-height: 7.8rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo cta"
+      "tabs tabs";
+    row-gap: 0.45rem;
+    padding: 0.45rem 0.7rem;
+    min-height: auto;
+    align-items: center;
+  }
+
+  .nav-logo {
+    position: static;
+    grid-area: logo;
+    justify-self: start;
+    transform: none;
+  }
+
+  .nav-logo-image {
+    width: 200px;
+    height: 80px;
   }
 
   .nav-tabs {
+    grid-area: tabs;
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
     gap: 0.4rem;
+    padding-bottom: 0.15rem;
+    scrollbar-width: none;
+  }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-tab {
+    flex: 0 0 auto;
     padding: 0.48rem 0.78rem;
     font-size: 0.78rem;
   }
 
   .nav-build-btn {
-    right: 0.7rem;
+    grid-area: cta;
+    position: static;
+    justify-self: end;
+    transform: none;
     padding: 0.52rem 0.92rem;
     font-size: 0.78rem;
   }
 
+  .nav-build-btn:hover {
+    transform: translateY(-1px);
+  }
+
   .hero {
-    padding: 6.9rem 2rem 2rem;
+    padding: 8.4rem 2rem 2rem;
     min-height: 100svh;
   }
 
@@ -1876,20 +1913,17 @@ body {
   }
 
   .nav-container {
-    padding: 0.22rem 0.45rem;
-    justify-content: flex-end;
-    min-height: 6rem;
+    padding: 0.38rem 0.45rem;
+    row-gap: 0.35rem;
   }
 
   .nav-logo {
-    top: 0;
-    left: 0;
-    transform: none;
+    position: static;
   }
 
   .nav-logo-image {
-    width: 240px;
-    height: 96px;
+    width: 156px;
+    height: 62px;
   }
 
   .nav-tabs {
@@ -1902,13 +1936,12 @@ body {
   }
 
   .nav-build-btn {
-    right: 0.45rem;
-    padding: 0.44rem 0.72rem;
-    font-size: 0.7rem;
+    padding: 0.42rem 0.68rem;
+    font-size: 0.68rem;
   }
 
   .hero {
-    padding: 6.4rem 1.5rem 2rem;
+    padding: 8.6rem 1.2rem 2rem;
   }
 
   .footer-logo-wrap {

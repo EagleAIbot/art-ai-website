@@ -45,6 +45,7 @@ function HeroEnergyOverlay() {
     let width = 0
     let height = 0
     let dpr = 1
+    let isMobile = false
 
     const createParticle = () => {
       const angle = Math.random() * Math.PI * 2
@@ -63,12 +64,17 @@ function HeroEnergyOverlay() {
       dpr = Math.min(window.devicePixelRatio || 1, 2)
       width = canvas.clientWidth
       height = canvas.clientHeight
+      isMobile = width <= 768
       canvas.width = Math.floor(width * dpr)
       canvas.height = Math.floor(height * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      const targetCount = Math.max(30, Math.floor((width * height) / 30000))
-      const minSpacing = Math.min(95, Math.max(58, Math.min(width, height) * 0.085))
+      const targetCount = isMobile
+        ? Math.max(42, Math.floor((width * height) / 19000))
+        : Math.max(30, Math.floor((width * height) / 30000))
+      const minSpacing = isMobile
+        ? Math.min(68, Math.max(36, Math.min(width, height) * 0.06))
+        : Math.min(95, Math.max(58, Math.min(width, height) * 0.085))
       const nextParticles = []
       let attempts = 0
       const maxAttempts = targetCount * 45
@@ -108,7 +114,7 @@ function HeroEnergyOverlay() {
         if (p.y > height + 24) p.y = -24
       }
 
-      const maxDist = Math.min(300, width * 0.23)
+      const maxDist = isMobile ? Math.min(260, width * 0.42) : Math.min(300, width * 0.23)
       for (let i = 0; i < particles.length; i++) {
         const a = particles[i]
         for (let j = i + 1; j < particles.length; j++) {
