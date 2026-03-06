@@ -211,7 +211,8 @@ function App() {
     const tl = gsap.timeline()
     tl.fromTo('.hero-title',    { opacity: 0, y: 55 }, { opacity: 1, y: 0, duration: 1,   ease: 'power3.out' })
       .fromTo('.hero-subtitle', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.55')
-      .fromTo('.hero-cta-wrap', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.45')
+      .fromTo('.hero-bridge',   { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' }, '-=0.42')
+      .fromTo('.hero-cta-wrap', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
   }, [animationsReady])
 
   const handleSubmit = async (e) => {
@@ -395,6 +396,7 @@ function App() {
             <a href="#solutions" className="nav-tab">Solutions</a>
             <a href="/team" className="nav-tab">Team</a>
             <a href="#work-with-us" className="nav-tab">Work With Us</a>
+            <a href="/blog" className="nav-tab">Blog</a>
             <a href="#contact" className="nav-tab">Contact</a>
           </div>
           <a href="#contact" className="nav-build-btn">Let's Build</a>
@@ -415,6 +417,7 @@ function App() {
           <p className="hero-subtitle">
             We build AI products using AI tools — making us faster, leaner,<br />and more responsive than 80% of technology firms.
           </p>
+          <p className="hero-bridge">If you can imagine it, we can <span className="hero-title-accent">build it</span>.</p>
           <div className="hero-cta-wrap">
             <a href="#contact" className="hero-cta">Start a Project <ArrowRight size={18} /></a>
           </div>
