@@ -40,10 +40,10 @@ export default function BlogPage() {
         <nav className="blog-nav">
           <a href="/#projects" className="blog-nav-link">Projects</a>
           <a href="/#solutions" className="blog-nav-link">Solutions</a>
-          <a href="/team" className="blog-nav-link">Team</a>
+          <a href="/partners" className="blog-nav-link">Partners</a>
           <a href="/#work-with-us" className="blog-nav-link">Work With Us</a>
+          <a href="/our-story" className="blog-nav-link">Our Story</a>
           <a href="/blog" className="blog-nav-link active">Blog</a>
-          <a href="/#contact" className="blog-nav-link">Contact</a>
         </nav>
       </header>
 
@@ -56,6 +56,14 @@ export default function BlogPage() {
           </h1>
           <p>
             Internal draft board for upcoming blog content and release planning.
+          </p>
+        </section>
+
+        <section className="blog-intro-note">
+          <h2>How to use this page</h2>
+          <p>
+            Use these cards as placeholders for final posts. You can replace the title, author, date, excerpt, and
+            body text whenever your real articles are ready.
           </p>
         </section>
 

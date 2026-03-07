@@ -94,6 +94,27 @@
   color: rgba(15, 23, 42, 0.74);
 }
 
+.blog-intro-note {
+  margin-top: 1.05rem;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 16px;
+  padding: 1.2rem 1.15rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.blog-intro-note h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.blog-intro-note p {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
 .blog-manage-btn,
 .blog-save-btn {
   border: 0;

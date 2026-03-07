@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
+import { Link } from 'react-router-dom'
 import { useAppStore } from './store/useAppStore'
 import { 
   ArrowRight, 
@@ -88,7 +89,7 @@ function HeroEnergyOverlay() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
       const targetCount = isMobile
-        ? Math.max(24, Math.floor((width * height) / 32000))
+        ? Math.max(8, Math.floor((width * height) / 96000))
         : Math.max(30, Math.floor((width * height) / 30000))
       const minSpacing = isMobile
         ? Math.min(84, Math.max(44, Math.min(width, height) * 0.08))
@@ -433,10 +434,10 @@ function App() {
           <div className="nav-tabs">
             <a href="#projects" className="nav-tab">Projects</a>
             <a href="#solutions" className="nav-tab">Solutions</a>
-            <a href="/team" className="nav-tab">Partners</a>
+            <Link to="/partners" className="nav-tab">Partners</Link>
             <a href="#work-with-us" className="nav-tab">Work With Us</a>
-            <a href="/our-story" className="nav-tab">Our Story</a>
-            <a href="/blog" className="nav-tab">Blog</a>
+            <Link to="/our-story" className="nav-tab">Our Story</Link>
+            <Link to="/blog" className="nav-tab">Blog</Link>
           </div>
           <a href="#contact" className="nav-build-btn">Let's Build <ArrowRight size={16} /></a>
         </div>
@@ -459,7 +460,7 @@ function App() {
           <p className="hero-bridge">If you can imagine it, we can <span className="hero-title-accent">build it</span>.</p>
           <div className="hero-cta-wrap">
             <a href="#contact" className="hero-cta">Start a Project <ArrowRight size={18} /></a>
-            <a href="/our-story" className="hero-story-link">Or, read our story</a>
+            <Link to="/our-story" className="hero-story-link">Or, read our story</Link>
           </div>
         </div>
       </section>
