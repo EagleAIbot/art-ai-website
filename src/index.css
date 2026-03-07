@@ -50,15 +50,15 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .loading-icon {
-  width: 64px;
-  height: 64px;
+  width: clamp(94px, 11vw, 136px);
+  height: clamp(94px, 11vw, 136px);
   object-fit: contain;
   animation: loading-pulse 1.6s ease-in-out infinite;
-  filter: drop-shadow(0 8px 20px rgba(139, 92, 246, 0.32));
+  filter: drop-shadow(0 14px 28px rgba(139, 92, 246, 0.35));
 }
 
 @keyframes loading-pulse {
@@ -66,15 +66,73 @@ html {
   50% { transform: scale(1.06); opacity: 1; }
 }
 
-.loading-label {
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, #a855f7, #4c1d95);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  opacity: 0.95;
+.loading-network-spinner {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  animation: loading-network-spin 1.9s linear infinite;
+}
+
+.loading-network-node {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f3e8ff 0%, #d8b4fe 36%, #9333ea 76%, #6b21a8 100%);
+  box-shadow:
+    0 0 0 1px rgba(233, 213, 255, 0.22),
+    0 0 14px rgba(168, 85, 247, 0.6),
+    0 0 22px rgba(126, 34, 206, 0.35);
+}
+
+.loading-network-node-a {
+  top: 8px;
+  left: 33px;
+}
+
+.loading-network-node-b {
+  bottom: 12px;
+  left: 11px;
+}
+
+.loading-network-node-c {
+  bottom: 12px;
+  right: 11px;
+}
+
+.loading-network-link {
+  position: absolute;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(196, 181, 253, 0.16), rgba(147, 51, 234, 0.8), rgba(196, 181, 253, 0.16));
+  box-shadow: 0 0 12px rgba(147, 51, 234, 0.5);
+  transform-origin: left center;
+}
+
+.loading-network-link-ab {
+  top: 22px;
+  left: 20px;
+  width: 30px;
+  transform: rotate(120deg);
+}
+
+.loading-network-link-bc {
+  top: 59px;
+  left: 20px;
+  width: 36px;
+}
+
+.loading-network-link-ca {
+  top: 22px;
+  left: 44px;
+  width: 30px;
+  transform: rotate(58deg);
+}
+
+@keyframes loading-network-spin {
+  0% { transform: rotate(0deg); opacity: 0.9; }
+  50% { opacity: 1; }
+  100% { transform: rotate(360deg); opacity: 0.9; }
 }
 
 /* Hide default cursor on desktop */

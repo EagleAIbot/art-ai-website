@@ -35,7 +35,7 @@ export default function BlogPage() {
     <div className="blog-page">
       <header className="blog-header">
         <a href="/" className="blog-logo-link" aria-label="Shift AI home">
-          <img src="/logo-with-border.png" alt="Shift AI logo" className="blog-logo-image" />
+          <img src="/logo.svg" alt="Shift AI logo" className="blog-logo-image" />
         </a>
         <nav className="blog-nav">
           <a href="/#projects" className="blog-nav-link">Projects</a>
