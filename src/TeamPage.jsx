@@ -54,6 +54,7 @@ export default function TeamPage() {
           <a href="/#solutions" className="team-nav-link">Solutions</a>
           <a href="/team" className="team-nav-link active">Team</a>
           <a href="/#work-with-us" className="team-nav-link">Work With Us</a>
+          <a href="/blog" className="team-nav-link">Blog</a>
           <a href="/#contact" className="team-nav-link">Contact</a>
         </nav>
       </header>
