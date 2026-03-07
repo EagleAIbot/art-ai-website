@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import TeamPage from './TeamPage.jsx'
 import BlogPage from './BlogPage.jsx'
+import OurStoryPage from './OurStoryPage.jsx'
 import { LenisProvider } from './components/LenisProvider.jsx'
 import { MagneticCursor } from './components/MagneticCursor.jsx'
 import { LoadingScreen } from './components/LoadingScreen.jsx'
@@ -21,6 +22,7 @@ function AppShell() {
         <Route path="/" element={<App />} />
         <Route path="/team" element={<TeamPage />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/our-story" element={<OurStoryPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </LenisProvider>

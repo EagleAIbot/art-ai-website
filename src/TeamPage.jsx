@@ -47,7 +47,7 @@ export default function TeamPage() {
     <div className="team-page">
       <header className="team-header">
         <a href="/" className="team-logo-link">
-          <img src="/logo-with-border.png" alt="Shift logo" className="team-logo" />
+          <img src="/logo.svg" alt="Shift logo" className="team-logo" />
         </a>
         <nav className="team-nav">
           <a href="/#projects" className="team-nav-link">Projects</a>

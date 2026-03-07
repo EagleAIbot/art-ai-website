@@ -21,12 +21,19 @@ export function LoadingScreen() {
   return (
     <div ref={ref} className="loading-screen">
       <img
-        src="/logo-with-border.png"
+        src="/logo.svg"
         alt="Shift AI Tech logo"
         className="loading-icon"
         onError={(e) => { e.currentTarget.src = '/vite.svg' }}
       />
-      <p className="loading-label">Shift AI Tech</p>
+      <div className="loading-network-spinner" aria-hidden="true">
+        <span className="loading-network-node loading-network-node-a" />
+        <span className="loading-network-node loading-network-node-b" />
+        <span className="loading-network-node loading-network-node-c" />
+        <span className="loading-network-link loading-network-link-ab" />
+        <span className="loading-network-link loading-network-link-bc" />
+        <span className="loading-network-link loading-network-link-ca" />
+      </div>
     </div>
   )
 }

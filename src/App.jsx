@@ -46,6 +46,8 @@ function HeroEnergyOverlay() {
     let height = 0
     let dpr = 1
     let isMobile = false
+    let prevWidth = 0
+    let prevHeight = 0
 
     const createParticle = () => {
       const angle = Math.random() * Math.PI * 2
@@ -61,10 +63,26 @@ function HeroEnergyOverlay() {
     }
 
     const resize = () => {
+      const nextWidth = canvas.clientWidth
+      const nextHeight = canvas.clientHeight
+      const nextIsMobile = nextWidth <= 768
+
+      // Mobile browsers fire tiny resize events during scroll when the address bar collapses.
+      // Ignore those micro-resizes so particles do not keep re-randomizing.
+      if (
+        nextIsMobile &&
+        prevWidth > 0 &&
+        prevHeight > 0 &&
+        Math.abs(nextWidth - prevWidth) < 3 &&
+        Math.abs(nextHeight - prevHeight) < 80
+      ) {
+        return
+      }
+
       dpr = Math.min(window.devicePixelRatio || 1, 2)
-      width = canvas.clientWidth
-      height = canvas.clientHeight
-      isMobile = width <= 768
+      width = nextWidth
+      height = nextHeight
+      isMobile = nextIsMobile
       canvas.width = Math.floor(width * dpr)
       canvas.height = Math.floor(height * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
@@ -96,6 +114,8 @@ function HeroEnergyOverlay() {
       while (nextParticles.length < targetCount) nextParticles.push(createParticle())
       particles.length = 0
       particles.push(...nextParticles)
+      prevWidth = width
+      prevHeight = height
     }
 
     const draw = (timeMs) => {
@@ -377,6 +397,25 @@ function App() {
     },
   ]
 
+  const financeCandles = [
+    { x: 4, h: 72, body: 26, delay: -0.6, dur: 8.2 },
+    { x: 11, h: 88, body: 32, delay: -1.3, dur: 8.9 },
+    { x: 18, h: 80, body: 28, delay: -2.1, dur: 8.6 },
+    { x: 25, h: 102, body: 38, delay: -0.9, dur: 9.3 },
+    { x: 32, h: 94, body: 34, delay: -2.7, dur: 8.4 },
+    { x: 39, h: 118, body: 42, delay: -1.4, dur: 9.5 },
+    { x: 46, h: 108, body: 38, delay: -0.2, dur: 8.7 },
+    { x: 53, h: 132, body: 46, delay: -2.4, dur: 9.9 },
+    { x: 60, h: 124, body: 42, delay: -1.1, dur: 8.8 },
+    { x: 67, h: 146, body: 50, delay: -2.9, dur: 9.6 },
+    { x: 73, h: 136, body: 46, delay: -0.8, dur: 8.9 },
+    { x: 78, h: 154, body: 52, delay: -1.5, dur: 9.2 },
+    { x: 83, h: 148, body: 48, delay: -1.9, dur: 9.7 },
+    { x: 87, h: 164, body: 54, delay: -0.4, dur: 9.1 },
+    { x: 91, h: 158, body: 52, delay: -1.1, dur: 9.4 },
+    { x: 95, h: 174, body: 58, delay: -2.2, dur: 10.2 },
+    { x: 98, h: 184, body: 62, delay: -1.7, dur: 9.8 },
+  ]
   return (
     <div className="app">
 
@@ -385,7 +424,7 @@ function App() {
         <div className="nav-container">
           <div className="nav-logo">
             <img
-              src="/logo-with-border.png"
+              src="/logo.svg"
               alt="Shift AI Tech logo"
               className="nav-logo-image"
               onError={(e) => { e.currentTarget.src = '/vite.svg' }}
@@ -394,12 +433,12 @@ function App() {
           <div className="nav-tabs">
             <a href="#projects" className="nav-tab">Projects</a>
             <a href="#solutions" className="nav-tab">Solutions</a>
-            <a href="/team" className="nav-tab">Team</a>
+            <a href="/team" className="nav-tab">Partners</a>
             <a href="#work-with-us" className="nav-tab">Work With Us</a>
+            <a href="/our-story" className="nav-tab">Our Story</a>
             <a href="/blog" className="nav-tab">Blog</a>
-            <a href="#contact" className="nav-tab">Contact</a>
           </div>
-          <a href="#contact" className="nav-build-btn">Let's Build</a>
+          <a href="#contact" className="nav-build-btn">Let's Build <ArrowRight size={16} /></a>
         </div>
       </nav>
 
@@ -420,6 +459,7 @@ function App() {
           <p className="hero-bridge">If you can imagine it, we can <span className="hero-title-accent">build it</span>.</p>
           <div className="hero-cta-wrap">
             <a href="#contact" className="hero-cta">Start a Project <ArrowRight size={18} /></a>
+            <a href="/our-story" className="hero-story-link">Or, read our story</a>
           </div>
         </div>
       </section>
@@ -497,6 +537,22 @@ function App() {
 
       {/* ── Financial Markets ────────────────────────── */}
       <section id="markets" className="finance-section">
+        <div className="finance-candle-bg" aria-hidden="true">
+          {financeCandles.map((c, i) => (
+            <span
+              key={i}
+              className="finance-candle finance-candle-top"
+              style={{
+                '--x': `${c.x}%`,
+                '--h': `${Math.max(70, c.h - 18)}px`,
+                '--body': `${Math.max(26, c.body - 8)}px`,
+                '--top': `${Math.max(2.5, Math.min(15, 14.5 - (c.h - 70) * 0.075))}%`,
+                '--delay': `${c.delay - 0.45}s`,
+                '--dur': `${c.dur + 0.6}s`,
+              }}
+            />
+          ))}
+        </div>
         <div className="finance-container">
           <motion.div className="finance-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <p className="section-label finance-label">Core Speciality</p>
@@ -611,7 +667,7 @@ function App() {
       <section className="cta-band">
         <div className="cta-band-container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="cta-band-title">Ready to cut costs<br />and build smarter?</h2>
+            <h2 className="cta-band-title">Ready to cut costs<br />and <span className="cta-band-accent">build smarter?</span></h2>
             <p className="cta-band-sub">One-off projects or ongoing retainers. No account managers. No nonsense.</p>
             <a href="#contact" className="cta-band-btn">Get a free consultation <ArrowRight size={18} /></a>
           </motion.div>
@@ -685,7 +741,7 @@ function App() {
         <div className="why-us-container">
           <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <p className="section-label">Why Shift AI Tech</p>
-            <h2 className="section-title">This is why we're different</h2>
+            <h2 className="section-title">This is why <span className="section-title-accent">we're different</span></h2>
           </motion.div>
           <div className="why-grid">
             {[
@@ -822,7 +878,7 @@ function App() {
         <div className="footer-container">
           <div className="footer-logo-wrap">
             <img
-              src="/logo-with-border.png"
+              src="/logo.svg"
               alt="Shift AI Tech logo"
               className="footer-logo-image"
               onError={(e) => { e.currentTarget.src = '/vite.svg' }}
