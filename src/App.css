@@ -1878,7 +1878,8 @@ body {
 
   .nav-logo-image {
     width: 190px;
-    height: 76px;
+    height: auto;
+    max-height: 76px;
   }
 
   .nav-tabs {
@@ -2085,7 +2086,8 @@ body {
 
   .nav-logo-image {
     width: 148px;
-    height: 58px;
+    height: auto;
+    max-height: 58px;
   }
 
   .nav-tabs {
