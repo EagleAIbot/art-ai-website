@@ -88,10 +88,10 @@ function HeroEnergyOverlay() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
       const targetCount = isMobile
-        ? Math.max(42, Math.floor((width * height) / 19000))
+        ? Math.max(24, Math.floor((width * height) / 32000))
         : Math.max(30, Math.floor((width * height) / 30000))
       const minSpacing = isMobile
-        ? Math.min(68, Math.max(36, Math.min(width, height) * 0.06))
+        ? Math.min(84, Math.max(44, Math.min(width, height) * 0.08))
         : Math.min(95, Math.max(58, Math.min(width, height) * 0.085))
       const nextParticles = []
       let attempts = 0
