@@ -7,6 +7,18 @@
     <meta name="description" content="Shift AI Tech - Custom AI models, full product builds, and automation for businesses across the UK." />
     <meta name="keywords" content="AI, Artificial Intelligence, AI Development, AI Automation, UK, AI Agency" />
     <title>Shift AI Tech - We Build AI That Works</title>
+    <script>
+      // Restore route state redirected from 404.html on GitHub Pages.
+      (function (location) {
+        if (!location.search || location.search[1] !== '/') return
+        var decoded = location.search
+          .slice(1)
+          .split('&')
+          .map(function (s) { return s.replace(/~and~/g, '&') })
+          .join('?')
+        window.history.replaceState(null, null, location.pathname + decoded + location.hash)
+      }(window.location))
+    </script>
   </head>
   <body>
     <div id="root"></div>
