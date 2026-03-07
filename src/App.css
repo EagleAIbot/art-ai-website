@@ -1915,8 +1915,8 @@ body {
   }
 
   .hero {
-    padding: 8.2rem 2rem 1.6rem;
-    min-height: 62svh;
+    padding: 8.9rem 2rem 2rem;
+    min-height: 74svh;
   }
 
   .hero-container {
@@ -1932,13 +1932,13 @@ body {
 
   .hero-subtitle {
     font-size: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
     line-height: 1.55;
   }
 
   .hero-bridge {
     font-size: clamp(1.16rem, 3.4vw, 1.5rem);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.4rem;
     line-height: 1.2;
   }
 
@@ -2103,8 +2103,8 @@ body {
   }
 
   .hero {
-    padding: 7.2rem 1.2rem 1.15rem;
-    min-height: 52svh;
+    padding: 8rem 1.2rem 1.6rem;
+    min-height: 66svh;
   }
 
   .hero-title {
@@ -2116,13 +2116,13 @@ body {
 
   .hero-subtitle {
     font-size: 0.94rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.45rem;
     line-height: 1.5;
   }
 
   .hero-bridge {
     font-size: 1.06rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
   }
 
   .hero-cta {
