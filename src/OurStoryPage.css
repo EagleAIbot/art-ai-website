@@ -165,6 +165,14 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: rgba(88, 28, 135, 0.74);
+  overflow: hidden;
+}
+
+.our-story-research-thumb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .our-story-research-card h3 {
