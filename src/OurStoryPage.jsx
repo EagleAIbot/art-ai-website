@@ -4,18 +4,25 @@ import { Link } from 'react-router-dom'
 const researchPapers = [
   {
     id: 'research-paper-1',
-    title: 'Research Paper 1',
-    summary: 'Placeholder for a key report on AI-assisted software delivery and productivity shifts.',
+    title: 'Deloitte: State of AI in the Enterprise (January 2026)',
+    summary: 'How AI is driving productivity, efficiency and new business models.',
+    thumbnail: '/research-paper-1-thumb.png',
+    href: 'https://www.deloitte.com/content/dam/assets-shared/docs/about/2025/state-of-ai-2026-global.pdf',
+    external: true,
   },
   {
     id: 'research-paper-2',
-    title: 'Research Paper 2',
-    summary: 'Placeholder for a market study covering cost compression in advanced AI product builds.',
+    title: 'McKinsey: The state of AI',
+    summary: 'A clear snapshot of enterprise AI adoption, scaling maturity, and where organisations are unlocking measurable value.',
+    thumbnail: '/research-paper-2-thumb.png',
+    href: 'https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai',
+    external: true,
   },
   {
     id: 'research-paper-3',
-    title: 'Research Paper 3',
-    summary: 'Placeholder for institutional research on AI development speed, quality, and deployment impact.',
+    title: 'Shift AI: The AI Value Shift',
+    summary: 'How artificial intelligence is driving measurable business impact across cost, productivity, and growth.',
+    thumbnail: '/research-paper-3-thumb.png',
   },
 ]
 
@@ -90,13 +97,41 @@ export default function OurStoryPage() {
         <section className="our-story-research">
           <h2 className="our-story-research-title">Explore the Research</h2>
           <div className="our-story-research-grid">
-            {researchPapers.map((paper) => (
-              <Link key={paper.id} to={`/research/${paper.id}`} className="our-story-research-card">
-                <div className="our-story-research-thumb" aria-hidden="true">Research</div>
-                <h3>{paper.title}</h3>
-                <p>{paper.summary}</p>
-              </Link>
-            ))}
+            {researchPapers.map((paper) => {
+              const cardContent = (
+                <>
+                  <div className="our-story-research-thumb" aria-hidden="true">
+                    {paper.thumbnail ? (
+                      <img src={paper.thumbnail} alt="" className="our-story-research-thumb-image" />
+                    ) : (
+                      'Research'
+                    )}
+                  </div>
+                  <h3>{paper.title}</h3>
+                  <p>{paper.summary}</p>
+                </>
+              )
+
+              if (paper.external) {
+                return (
+                  <a
+                    key={paper.id}
+                    href={paper.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="our-story-research-card"
+                  >
+                    {cardContent}
+                  </a>
+                )
+              }
+
+              return (
+                <Link key={paper.id} to={`/research/${paper.id}`} className="our-story-research-card">
+                  {cardContent}
+                </Link>
+              )
+            })}
           </div>
         </section>
 
