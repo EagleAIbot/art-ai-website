@@ -1,4 +1,23 @@
 import './OurStoryPage.css'
+import { Link } from 'react-router-dom'
+
+const researchPapers = [
+  {
+    id: 'research-paper-1',
+    title: 'Research Paper 1',
+    summary: 'Placeholder for a key report on AI-assisted software delivery and productivity shifts.',
+  },
+  {
+    id: 'research-paper-2',
+    title: 'Research Paper 2',
+    summary: 'Placeholder for a market study covering cost compression in advanced AI product builds.',
+  },
+  {
+    id: 'research-paper-3',
+    title: 'Research Paper 3',
+    summary: 'Placeholder for institutional research on AI development speed, quality, and deployment impact.',
+  },
+]
 
 export default function OurStoryPage() {
   return (
@@ -19,34 +38,77 @@ export default function OurStoryPage() {
 
       <main className="our-story-main">
         <p className="our-story-kicker">Our Story</p>
-        <h1 className="our-story-title">Our Story</h1>
-        <p className="our-story-subtitle">
-          We started Shift AI Tech to help ambitious teams move faster with practical, revenue-focused AI systems.
-          This page is ready for your full story content.
-        </p>
-        <section className="our-story-blocks">
-          <article className="our-story-block">
-            <h2>Why we started</h2>
-            <p>
-              We saw too many projects stuck between strategy decks and real output. Shift was built to close that
-              gap with practical AI delivery that creates measurable results quickly.
-            </p>
-          </article>
-          <article className="our-story-block">
-            <h2>How we work</h2>
-            <p>
-              We keep teams lean, iterate fast, and ship in production cycles rather than long research phases. This
-              section can be replaced with your full operating model and methodology.
-            </p>
-          </article>
-          <article className="our-story-block">
-            <h2>Where we are going</h2>
-            <p>
-              Our focus is to become the most trusted partner for businesses building high-impact AI products and
-              automation systems in the UK and beyond.
-            </p>
-          </article>
+        <h1 className="our-story-title">Why <span className="our-story-accent">Shift AI</span> Exists</h1>
+
+        <section className="our-story-prose">
+          <p>
+            In 2024, the founding partners of Shift AI commissioned the development of advanced neural network models
+            designed to predict Bitcoin price movements.
+          </p>
+          <p>
+            The project required over $650,000 in capital across development, training, backtesting and infrastructure.
+            It was a serious undertaking built to institutional standards.
+          </p>
+          <p>
+            The result was a set of models so sophisticated that they contributed to the creation of Infinite Point
+            Capital, a U.S. regulated Bitcoin investment fund licensed to operate a customised, risk-managed BTC trading
+            strategy built on this technology.
+          </p>
+          <p>
+            With a targeted $100-300 million in assets under management, the stakes were high. The models had to
+            perform. And they did.
+          </p>
+          <p>
+            But the real breakthrough came later.
+          </p>
+          <p>
+            By 2026, the same systems were rebuilt using a new generation of AI-assisted development tooling. What once
+            required months of engineering effort and significant capital was reproduced with an 82% reduction in
+            development cost.
+          </p>
+          <p>
+            This moment revealed something much bigger.
+          </p>
+          <p>
+            It exposed a structural shift in how advanced software - and particularly AI systems - can be built.
+            Projects that once demanded enormous capital expenditure can now be delivered faster, leaner and far more
+            efficiently.
+          </p>
+          <p>
+            Leading consulting firms including Accenture, EY, McKinsey and Gartner are now publishing research
+            highlighting this same transformation across the global technology landscape.
+          </p>
+          <p>
+            We encourage you to explore some of this research yourself.
+          </p>
+          <p>
+            The industry is only beginning to recognise the scale of this shift. At Shift AI, we experienced it
+            first-hand - long before it became a widely discussed theme.
+          </p>
         </section>
+
+        <section className="our-story-research">
+          <h2 className="our-story-research-title">Explore the Research</h2>
+          <div className="our-story-research-grid">
+            {researchPapers.map((paper) => (
+              <Link key={paper.id} to={`/research/${paper.id}`} className="our-story-research-card">
+                <div className="our-story-research-thumb" aria-hidden="true">Research</div>
+                <h3>{paper.title}</h3>
+                <p>{paper.summary}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <p className="our-story-close">
+          At Shift AI, we didn&apos;t discover this transformation in theory.
+          <br />
+          We lived it.
+          <br />
+          We learned through real development cycles, real capital investment and real-world deployment.
+          <br />
+          That experience now forms the foundation of our work.
+        </p>
         <a href="/#contact" className="our-story-cta">Start a Project</a>
       </main>
     </div>
