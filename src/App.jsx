@@ -197,6 +197,7 @@ function App() {
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [formLoading, setFormLoading] = useState(false)
   const [formError, setFormError] = useState(false)
+  const [formErrorMessage, setFormErrorMessage] = useState('')
   const tickerRef = useRef(null)
 
   const { sceneLoaded, setAnimationsReady, setFinished } = useAppStore()
@@ -240,19 +241,44 @@ function App() {
     e.preventDefault()
     setFormLoading(true)
     setFormError(false)
+    setFormErrorMessage('')
     try {
-      const res = await fetch(`https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`, {
+      const formspreeId = import.meta.env.VITE_FORMSPREE_ID?.trim()
+      if (!formspreeId) {
+        throw new Error('FORMSPREE_NOT_CONFIGURED')
+      }
+
+      const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          message: formData.message,
+          _subject: `New Shift AI enquiry from ${formData.name}`,
+        }),
       })
       if (res.ok) {
         setFormSubmitted(true)
       } else {
+        let nextError = 'Something went wrong. Please email us directly at jack@shiftaitech.com.'
+        try {
+          const payload = await res.json()
+          if (payload?.errors?.[0]?.message) nextError = payload.errors[0].message
+        } catch {
+          // Ignore JSON parse errors and keep the default message.
+        }
         setFormError(true)
+        setFormErrorMessage(nextError)
       }
-    } catch {
+    } catch (err) {
       setFormError(true)
+      if (err instanceof Error && err.message === 'FORMSPREE_NOT_CONFIGURED') {
+        setFormErrorMessage('Contact form is not configured yet. Please add VITE_FORMSPREE_ID in .env.local for local testing.')
+      } else {
+        setFormErrorMessage('Network error. Please email us directly at jack@shiftaitech.com.')
+      }
     } finally {
       setFormLoading(false)
     }
@@ -857,7 +883,10 @@ function App() {
                     {formLoading ? 'Sending…' : <><span>Send Message</span> <ArrowRight size={18} /></>}
                   </button>
                   {formError && (
-                    <p className="form-error">Something went wrong. Please email us directly at <a href="mailto:jack@shiftaitech.com">jack@shiftaitech.com</a></p>
+                    <p className="form-error">
+                      {formErrorMessage || 'Something went wrong. Please email us directly at '}
+                      {formErrorMessage ? null : <a href="mailto:jack@shiftaitech.com">jack@shiftaitech.com</a>}
+                    </p>
                   )}
                 </form>
               ) : (
