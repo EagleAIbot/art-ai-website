@@ -1,4 +1,13 @@
+import { motion } from 'framer-motion'
+import { Container, SectionLabel } from './components/ui'
 import './BlogPage.css'
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5 },
+}
 
 const DRAFT_POSTS = [
   {
@@ -32,52 +41,42 @@ const DRAFT_POSTS = [
 
 export default function BlogPage() {
   return (
-    <div className="blog-page">
-      <header className="blog-header">
-        <a href="/" className="blog-logo-link" aria-label="Shift AI home">
-          <img src="/logo.svg" alt="Shift AI logo" className="blog-logo-image" />
-        </a>
-        <nav className="blog-nav">
-          <a href="/#projects" className="blog-nav-link">Projects</a>
-          <a href="/#solutions" className="blog-nav-link">Solutions</a>
-          <a href="/partners" className="blog-nav-link">Partners</a>
-          <a href="/#work-with-us" className="blog-nav-link">Work With Us</a>
-          <a href="/our-story" className="blog-nav-link">Our Story</a>
-          <a href="/blog" className="blog-nav-link active">Blog</a>
-        </nav>
-      </header>
+    <div className="subpage blog-page">
+      <section className="subpage-hero">
+        <Container>
+          <motion.div {...fadeUp}>
+            <SectionLabel>Shift Journal</SectionLabel>
+            <h1 className="subpage-title">
+              Insights from High-Performance <span className="text-accent">AI Delivery Teams</span>
+            </h1>
+            <p className="subpage-sub">
+              Internal draft board for upcoming blog content and release planning.
+            </p>
+          </motion.div>
+        </Container>
+      </section>
 
-      <main className="blog-main">
-        <section className="blog-hero">
-          <p className="blog-kicker">Shift Journal</p>
-          <h1>
-            Insights from high-performance
-            <span className="blog-title-accent"> AI delivery teams</span>
-          </h1>
-          <p>
-            Internal draft board for upcoming blog content and release planning.
-          </p>
-        </section>
-
-        <section className="blog-intro-note">
-          <h2>How to use this page</h2>
-          <p>
-            Use these cards as placeholders for final posts. You can replace the title, author, date, excerpt, and
-            body text whenever your real articles are ready.
-          </p>
-        </section>
-
-        <section className="blog-posts">
-          {DRAFT_POSTS.map((post) => (
-            <article className="blog-post-card" key={post.id}>
-              <p className="blog-post-meta">{post.author} - Drafted {post.draftDate}</p>
-              <h2>{post.title}</h2>
-              {post.excerpt ? <p className="blog-post-excerpt">{post.excerpt}</p> : null}
-              <p>{post.content}</p>
-            </article>
-          ))}
-        </section>
-      </main>
+      <section className="section">
+        <Container>
+          <div className="blog-grid">
+            {DRAFT_POSTS.map((post, i) => (
+              <motion.article
+                key={post.id}
+                className="blog-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+              >
+                <p className="blog-card-meta">{post.author} &middot; {post.draftDate}</p>
+                <h2 className="blog-card-title">{post.title}</h2>
+                <p className="blog-card-excerpt">{post.excerpt}</p>
+                <p className="blog-card-body">{post.content}</p>
+              </motion.article>
+            ))}
+          </div>
+        </Container>
+      </section>
     </div>
   )
 }

@@ -1,12 +1,20 @@
+import { motion } from 'framer-motion'
+import { Container, SectionLabel, Button } from './components/ui'
 import './TeamPage.css'
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5 },
+}
 
 const teamProfiles = [
   {
     name: 'Your Name',
     role: 'Founder & AI Product Lead',
     location: 'United Kingdom',
-    bio: 'Add a short 2-3 sentence bio here covering background, specialism, and the kind of business outcomes this person drives.',
-    image: '',
+    bio: 'Add a short 2–3 sentence bio here covering background, specialism, and the kind of business outcomes this person drives.',
     skills: ['AI Strategy', 'Product Delivery', 'LLM Solutions'],
     email: 'hello@yourcompany.com',
     linkedin: '#',
@@ -16,7 +24,6 @@ const teamProfiles = [
     role: 'Machine Learning Engineer',
     location: 'United Kingdom',
     bio: 'Add profile details, technical strengths, and examples of the projects this person typically supports.',
-    image: '',
     skills: ['Model Training', 'RAG Pipelines', 'MLOps'],
     email: 'member@yourcompany.com',
     linkedin: '#',
@@ -26,7 +33,6 @@ const teamProfiles = [
     role: 'Automation & Integrations Engineer',
     location: 'United Kingdom',
     bio: 'Describe this person in practical terms: what they build, what business problems they solve, and what tools they use.',
-    image: '',
     skills: ['Workflow Automation', 'API Integrations', 'Agent Systems'],
     email: 'member@yourcompany.com',
     linkedin: '#',
@@ -44,66 +50,58 @@ function initialsFor(name) {
 
 export default function TeamPage() {
   return (
-    <div className="team-page">
-      <header className="team-header">
-        <a href="/" className="team-logo-link">
-          <img src="/logo.svg" alt="Shift logo" className="team-logo" />
-        </a>
-        <nav className="team-nav">
-          <a href="/#projects" className="team-nav-link">Projects</a>
-          <a href="/#solutions" className="team-nav-link">Solutions</a>
-          <a href="/team" className="team-nav-link active">Team</a>
-          <a href="/#work-with-us" className="team-nav-link">Work With Us</a>
-          <a href="/blog" className="team-nav-link">Blog</a>
-          <a href="/#contact" className="team-nav-link">Contact</a>
-        </nav>
-      </header>
+    <div className="subpage team-page">
+      <section className="subpage-hero">
+        <Container>
+          <motion.div {...fadeUp}>
+            <SectionLabel>Team</SectionLabel>
+            <h1 className="subpage-title">Meet the People Behind Shift</h1>
+            <p className="subpage-sub">
+              This page is a ready-to-edit template. Add photos, bios, and links for each team member.
+            </p>
+          </motion.div>
+        </Container>
+      </section>
 
-      <main className="team-main">
-        <section className="team-hero">
-          <p className="team-label">Team</p>
-          <h1 className="team-title">Meet the people behind Shift</h1>
-          <p className="team-subtitle">
-            This page is a ready-to-edit template. Add photos, bios, and links for each team member.
-          </p>
-        </section>
-
-        <section className="team-grid">
-          {teamProfiles.map((member, idx) => (
-            <article key={idx} className="team-card">
-              <div className="team-card-top">
-                {member.image ? (
-                  <img src={member.image} alt={member.name} className="team-photo" />
-                ) : (
-                  <div className="team-photo team-photo-placeholder">{initialsFor(member.name)}</div>
-                )}
-                <div className="team-meta">
-                  <h2 className="team-name">{member.name}</h2>
-                  <p className="team-role">{member.role}</p>
-                  <p className="team-location">{member.location}</p>
+      <section className="section">
+        <Container>
+          <div className="team-grid">
+            {teamProfiles.map((member, i) => (
+              <motion.article
+                key={i}
+                className="team-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+              >
+                <div className="team-card-header">
+                  <div className="team-avatar">{initialsFor(member.name)}</div>
+                  <div>
+                    <h2 className="team-name">{member.name}</h2>
+                    <p className="team-role">{member.role}</p>
+                    <p className="team-location">{member.location}</p>
+                  </div>
                 </div>
-              </div>
+                <p className="team-bio">{member.bio}</p>
+                <div className="team-skills">
+                  {member.skills.map((s) => (
+                    <span key={s} className="tag">{s}</span>
+                  ))}
+                </div>
+                <div className="team-links">
+                  <a href={`mailto:${member.email}`} className="team-link">Email</a>
+                  <a href={member.linkedin} className="team-link">LinkedIn</a>
+                </div>
+              </motion.article>
+            ))}
+          </div>
 
-              <p className="team-bio">{member.bio}</p>
-
-              <div className="team-skills">
-                {member.skills.map((skill, skillIdx) => (
-                  <span key={skillIdx} className="team-skill">{skill}</span>
-                ))}
-              </div>
-
-              <div className="team-links">
-                <a href={`mailto:${member.email}`} className="team-link">Email</a>
-                <a href={member.linkedin} className="team-link">LinkedIn</a>
-              </div>
-            </article>
-          ))}
-        </section>
-
-        <section className="team-cta-row">
-          <a href="/#contact" className="team-cta-btn">Start a Project</a>
-        </section>
-      </main>
+          <div className="team-cta">
+            <Button href="/#contact">Start a Project</Button>
+          </div>
+        </Container>
+      </section>
     </div>
   )
 }
