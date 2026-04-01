@@ -24,6 +24,13 @@ const teamMembers = [
     summary:
       'Co-founder of Shift AI Tech. Drives business development, operations, and growth strategy across the company.',
   },
+  {
+    name: 'Jamie Ratsma',
+    role: 'Partner',
+    image: `${import.meta.env.BASE_URL}jamie-ratsma.png`,
+    summary:
+      'Co-founder of Shift AI Tech. Brings strategic insight and executional leadership to every engagement.',
+  },
 ]
 
 export default function PartnersPage() {
