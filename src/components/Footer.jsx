@@ -38,10 +38,10 @@ export default function Footer() {
           <div className="footer-nav-group">
             <p className="footer-nav-label">Get Started</p>
             <a href="/#contact" className="footer-nav-link footer-nav-link--cta">
-              Start a Project <ArrowRight size={14} />
+              Start a Partnership <ArrowRight size={14} />
             </a>
-            <a href="mailto:jack@shiftaitech.com" className="footer-nav-link">
-              jack@shiftaitech.com
+            <a href="mailto:partnerships@shiftaitech.com" className="footer-nav-link">
+              partnerships@shiftaitech.com
             </a>
             <span className="footer-nav-link footer-nav-link--static">United Kingdom</span>
           </div>
