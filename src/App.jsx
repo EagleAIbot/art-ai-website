@@ -189,6 +189,17 @@ function App() {
 
       {/* Hero */}
       <section className="hero">
+        <div className="hero-video-wrap" aria-hidden="true">
+          <video
+            className="hero-video"
+            src="/hero-bg.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+          <div className="hero-video-overlay" />
+        </div>
         <Container>
           <motion.div className="hero-inner" {...fadeUp}>
             <h1 className="hero-title">
