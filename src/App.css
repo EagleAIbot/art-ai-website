@@ -190,10 +190,9 @@
 }
 
 .nav-logo-img {
-  height: 38px;
+  height: 34px;
   width: auto;
   object-fit: contain;
-  border-radius: 4px;
 }
 
 .nav-links {
@@ -1191,10 +1190,9 @@
 }
 
 .footer-logo-img {
-  height: 32px;
+  height: 28px;
   width: auto;
   object-fit: contain;
-  border-radius: 3px;
 }
 
 .footer-tagline {
