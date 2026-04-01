@@ -5,12 +5,11 @@
     <title>Shift AI Tech</title>
     <script>
       (function () {
-        var base = '/shiftai/'
+        var base = '/shiftai'
         var l = window.location
-        var path = l.pathname.startsWith(base) ? l.pathname.slice(base.length) : l.pathname.slice(1)
+        var path = l.pathname.startsWith(base) ? l.pathname.slice(base.length) : '/'
         var redirect = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-          base + '?/' + path.replace(/&/g, '~and~') +
-          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') + l.hash
+          base + '/?p=' + encodeURIComponent(path) + l.hash
         l.replace(redirect)
       })()
     </script>
