@@ -63,10 +63,9 @@ export default function Navigation() {
       <div className="nav-container">
         <Link to="/" className="nav-logo" aria-label="Shift AI Tech home">
           <img
-            src="/logo.svg"
+            src="/shift-logo-new.png"
             alt="Shift AI Tech"
             className="nav-logo-img"
-            onError={(e) => { e.currentTarget.src = '/vite.svg' }}
           />
         </Link>
 

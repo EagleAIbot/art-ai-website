@@ -9,10 +9,9 @@ export default function Footer() {
           <div className="footer-brand">
             <Link to="/" className="footer-logo-link">
               <img
-                src="/logo.svg"
+                src="/shift-logo-new.png"
                 alt="Shift AI Tech"
                 className="footer-logo-img"
-                onError={(e) => { e.currentTarget.src = '/vite.svg' }}
               />
             </Link>
             <p className="footer-tagline">
