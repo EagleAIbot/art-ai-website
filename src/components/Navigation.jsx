@@ -7,9 +7,9 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'dark'
+      return localStorage.getItem('theme') || 'light'
     }
-    return 'dark'
+    return 'light'
   })
   const location = useLocation()
   const isHome = location.pathname === '/'
@@ -71,8 +71,10 @@ export default function Navigation() {
     )
   }
 
-  return (
-    <nav className={`nav${scrolled ? ' nav--scrolled' : ''}${mobileOpen ? ' nav--open' : ''}`}>
+    const inHero = !scrolled
+
+    return (
+    <nav className={`nav${scrolled ? ' nav--scrolled' : ''}${mobileOpen ? ' nav--open' : ''}${inHero ? ' nav--hero' : ''}`}>
       <div className="nav-container">
         <Link to="/" className="nav-logo" aria-label="Shift AI Tech home">
           <img

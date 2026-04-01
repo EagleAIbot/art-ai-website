@@ -212,7 +212,7 @@
 
 .nav-link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(128, 128, 128, 0.08);
 }
 
 .nav-link--active {
@@ -223,6 +223,31 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+/* Nav over hero: always white text, transparent bg */
+.nav--hero .nav-link {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.nav--hero .nav-link:hover,
+.nav--hero .nav-link--active {
+  color: #fff;
+}
+
+.nav--hero .nav-theme-toggle {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav--hero .nav-theme-toggle:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav--hero .nav-logo-img {
+  filter: none !important;
 }
 
 .nav-theme-toggle {
@@ -1693,75 +1718,225 @@
    Light Mode Overrides
    ═══════════════════════════════════════════════════ */
 
-[data-theme="light"] .nav-logo-img,
-[data-theme="light"] .footer-logo-img {
+/* --- Nav: scrolled in light mode → white bg, dark text, black logo --- */
+[data-theme="light"] .nav--scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom-color: #e0e0e5;
+}
+
+[data-theme="light"] .nav--scrolled .nav-logo-img {
   filter: invert(1);
 }
 
-[data-theme="light"] .hero-video-overlay {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.7) 40%, rgba(255, 255, 255, 0.9) 100%),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, transparent 50%);
-}
-
-[data-theme="light"] .nav--scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-}
-
-[data-theme="light"] .finance-hero-overlay {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.93) 100%);
-}
-
-[data-theme="light"] .finance-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  border-color: var(--border);
-}
-
-[data-theme="light"] .finance-card:hover {
-  border-color: var(--purple-border);
-}
-
-[data-theme="light"] .finance-card-desc {
-  color: var(--text-secondary);
-}
-
-[data-theme="light"] .section-intro--onDark {
-  color: var(--text-secondary);
-}
-
-[data-theme="light"] .cta-band-overlay {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.95) 100%);
-}
-
-[data-theme="light"] .contact-bg-overlay {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.93) 0%, rgba(255, 255, 255, 0.88) 50%, rgba(255, 255, 255, 0.96) 100%);
-}
-
-[data-theme="light"] .service-featured-img-overlay {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(245, 245, 247, 0.8) 100%);
-}
-
-[data-theme="light"] .stat-value {
-  color: var(--purple);
-}
-
-[data-theme="light"] .ticker {
-  background: var(--bg-surface);
-  border-color: var(--border);
-}
-
-[data-theme="light"] .ticker-item {
-  color: var(--text-tertiary);
+[data-theme="light"] .footer-logo-img {
+  filter: invert(1);
 }
 
 [data-theme="light"] .nav-mobile {
   background: var(--bg-primary);
 }
 
+/* --- Hero + ticker + differentiator: ALWAYS dark --- */
+[data-theme="light"] .hero {
+  background: #09090b;
+}
+
+[data-theme="light"] .hero-title,
+[data-theme="light"] .hero-bridge {
+  color: #f0f0f3;
+}
+
+[data-theme="light"] .hero-sub {
+  color: #94949e;
+}
+
+[data-theme="light"] .hero .text-accent {
+  color: #c084fc;
+}
+
+[data-theme="light"] .hero .ui-btn--primary {
+  background: #a855f7;
+  color: #fff;
+}
+
+[data-theme="light"] .hero-story-link {
+  color: #94949e;
+}
+
+[data-theme="light"] .ticker {
+  background: #111114;
+  border-color: #23232a;
+}
+
+[data-theme="light"] .ticker-item {
+  color: #636370;
+}
+
+[data-theme="light"] .differentiator {
+  background: #09090b;
+  border-color: #23232a;
+}
+
+[data-theme="light"] .differentiator-number {
+  color: #f0f0f3;
+}
+
+[data-theme="light"] .differentiator-text {
+  color: #94949e;
+}
+
+[data-theme="light"] .differentiator-pill {
+  border-color: rgba(168, 85, 247, 0.18);
+  color: #c084fc;
+}
+
+[data-theme="light"] .differentiator-divider {
+  background: #23232a;
+}
+
+/* --- Service card image overlay --- */
+[data-theme="light"] .service-featured-img-overlay {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(245, 245, 247, 0.85) 100%);
+}
+
+/* --- Finance section: keep dark since it has bg image --- */
+[data-theme="light"] .section--finance {
+  background: #09090b;
+}
+
+[data-theme="light"] .finance-header .ui-section-label {
+  color: #c084fc;
+}
+
+[data-theme="light"] .finance-header .ui-section-heading {
+  color: #f0f0f3;
+}
+
+[data-theme="light"] .section-intro--onDark {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+[data-theme="light"] .finance-card {
+  background: rgba(9, 9, 11, 0.6);
+  backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+[data-theme="light"] .finance-card:hover {
+  border-color: rgba(168, 85, 247, 0.18);
+}
+
+[data-theme="light"] .finance-card-title {
+  color: #f0f0f3;
+}
+
+[data-theme="light"] .finance-card-desc {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+[data-theme="light"] .finance-card-icon {
+  background: rgba(168, 85, 247, 0.07);
+  border-color: rgba(168, 85, 247, 0.18);
+  color: #c084fc;
+}
+
+[data-theme="light"] .finance-cta .ui-btn--primary {
+  background: #a855f7;
+}
+
+[data-theme="light"] .finance-note {
+  color: #636370;
+}
+
+/* --- CTA band: keep dark since it has bg image --- */
+[data-theme="light"] .cta-band {
+  background: #09090b;
+}
+
+[data-theme="light"] .cta-band-title {
+  color: #f0f0f3;
+}
+
+[data-theme="light"] .cta-band .text-accent {
+  color: #c084fc;
+}
+
+[data-theme="light"] .cta-band-sub {
+  color: #94949e;
+}
+
+[data-theme="light"] .cta-band .ui-btn--primary {
+  background: #a855f7;
+  color: #fff;
+}
+
+/* --- Contact section: keep dark since it has bg image --- */
+[data-theme="light"] .section--contact {
+  background: #09090b;
+}
+
+[data-theme="light"] .section--contact .ui-section-label {
+  color: #c084fc;
+}
+
+[data-theme="light"] .section--contact .ui-section-heading {
+  color: #f0f0f3;
+}
+
+[data-theme="light"] .section--contact .section-intro {
+  color: #94949e;
+}
+
+[data-theme="light"] .section--contact .contact-item {
+  color: #94949e;
+}
+
+[data-theme="light"] .section--contact .contact-item svg {
+  color: #636370;
+}
+
+[data-theme="light"] .section--contact .contact-item a {
+  color: #94949e;
+  border-color: rgba(168, 85, 247, 0.18);
+}
+
+[data-theme="light"] .section--contact .contact-response {
+  color: #a855f7;
+}
+
+[data-theme="light"] .section--contact .contact-form-wrap {
+  background: #111114;
+  border-color: #23232a;
+}
+
+[data-theme="light"] .section--contact .contact-form-group label {
+  color: #94949e;
+}
+
+[data-theme="light"] .section--contact .contact-form-group input,
+[data-theme="light"] .section--contact .contact-form-group textarea {
+  background: #09090b;
+  border-color: #23232a;
+  color: #f0f0f3;
+}
+
+[data-theme="light"] .section--contact .contact-form-group input::placeholder,
+[data-theme="light"] .section--contact .contact-form-group textarea::placeholder {
+  color: #636370;
+}
+
+[data-theme="light"] .section--contact .contact-form-submit {
+  background: #a855f7;
+  color: #fff;
+}
+
+/* --- Stats section: purple values in light mode --- */
+[data-theme="light"] .stat-value {
+  color: var(--purple);
+}
+
+/* --- General text accent --- */
 [data-theme="light"] .text-accent {
   color: var(--purple);
 }
