@@ -11,23 +11,20 @@ const fadeUp = {
 
 const teamMembers = [
   {
-    name: 'Jack Rockell',
+    name: '',
     role: 'Partner',
-    image: `${import.meta.env.BASE_URL}jack-rockell.png`,
     summary:
       'Co-founder of Shift AI Tech. Leads product strategy, client partnerships, and technical delivery across AI and web projects.',
   },
   {
-    name: 'Darren Bishop',
+    name: '',
     role: 'Partner',
-    image: `${import.meta.env.BASE_URL}darren-bishop.png`,
     summary:
       'Co-founder of Shift AI Tech. Drives business development, operations, and growth strategy across the company.',
   },
   {
-    name: 'Jamie Ratsma',
+    name: '',
     role: 'Partner',
-    image: `${import.meta.env.BASE_URL}jamie-ratsma.png`,
     summary:
       'Co-founder of Shift AI Tech. Brings strategic insight and executional leadership to every engagement.',
   },
