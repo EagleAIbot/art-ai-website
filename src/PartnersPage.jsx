@@ -11,22 +11,18 @@ const fadeUp = {
 
 const teamMembers = [
   {
-    name: 'Founder Name',
-    role: 'Founder & AI Product Lead',
+    name: 'Jack Rockell',
+    role: 'Partner',
+    image: `${import.meta.env.BASE_URL}jack-rockell.png`,
     summary:
-      'Owns product direction, client strategy, and delivery outcomes. Replace this with a short founder bio and background.',
+      'Co-founder of Shift AI Tech. Leads product strategy, client partnerships, and technical delivery across AI and web projects.',
   },
   {
-    name: 'Team Member Name',
-    role: 'Machine Learning Engineer',
+    name: 'Darren Bishop',
+    role: 'Partner',
+    image: `${import.meta.env.BASE_URL}darren-bishop.png`,
     summary:
-      'Builds model pipelines, evaluation workflows, and deployment infrastructure. Replace with real profile details.',
-  },
-  {
-    name: 'Team Member Name',
-    role: 'Automation & Integrations Engineer',
-    summary:
-      'Designs end-to-end automations, API integrations, and agent workflows. Replace with real profile details.',
+      'Co-founder of Shift AI Tech. Drives business development, operations, and growth strategy across the company.',
   },
 ]
 
@@ -37,9 +33,9 @@ export default function PartnersPage() {
         <Container>
           <motion.div {...fadeUp}>
             <SectionLabel>Partners</SectionLabel>
-            <h1 className="subpage-title">Meet the Team Behind Shift</h1>
+            <h1 className="subpage-title">Meet the Partners Behind Shift</h1>
             <p className="subpage-sub">
-              Introduction to the core team. Replace each profile with real names, photos, and details as you finalise.
+              The people driving Shift AI Tech forward. Strategy, delivery, and growth.
             </p>
           </motion.div>
         </Container>
@@ -57,6 +53,11 @@ export default function PartnersPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
               >
+                {member.image && (
+                  <div className="partner-img-wrap">
+                    <img src={member.image} alt={member.name} className="partner-img" />
+                  </div>
+                )}
                 <p className="partner-role">{member.role}</p>
                 <h2 className="partner-name">{member.name}</h2>
                 <p className="partner-summary">{member.summary}</p>
