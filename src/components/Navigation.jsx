@@ -71,10 +71,10 @@ export default function Navigation() {
     )
   }
 
-    const inHero = !scrolled
+    const inHero = isHome && !scrolled
 
     return (
-    <nav className={`nav${scrolled ? ' nav--scrolled' : ''}${mobileOpen ? ' nav--open' : ''}${inHero ? ' nav--hero' : ''}`}>
+    <nav className={`nav${scrolled || !isHome ? ' nav--scrolled' : ''}${mobileOpen ? ' nav--open' : ''}${inHero ? ' nav--hero' : ''}`}>
       <div className="nav-container">
         <Link to="/" className="nav-logo" aria-label="Shift AI Tech home">
           <img
