@@ -20,7 +20,6 @@ import {
   AlertTriangle,
   Cpu,
   Globe,
-  Layers,
   GraduationCap,
   Utensils,
   Users,
@@ -41,6 +40,17 @@ const stagger = (i, base = 0.06) => ({
   transition: { ...fadeUp.transition, delay: i * base },
 })
 
+const IMG = {
+  finance: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80',
+  aiChip: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
+  data: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
+  server: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80',
+  office: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+  skyline: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+  meeting: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
+  localShop: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+}
+
 const techStack = [
   'GPT-4o', 'Claude 3.5', 'Gemini 2.0', 'Llama 3', 'Mistral',
   'LangChain', 'Pinecone', 'Bloomberg API', 'Alpaca', 'Interactive Brokers',
@@ -52,21 +62,25 @@ const services = [
     number: '01',
     title: 'Custom AI Models',
     description: 'Fine-tuned models, RAG pipelines, predictive systems, autonomous agents. We work with GPT-4o, Claude, Llama, Mistral, and custom-trained architectures.',
+    img: IMG.aiChip,
   },
   {
     number: '02',
     title: 'Full Product Builds',
     description: 'End-to-end development of AI-powered products, from initial concept through to live deployment. We own the full stack: frontend, backend, model integration, infrastructure.',
+    img: IMG.server,
   },
   {
     number: '03',
     title: 'Process Automation',
     description: 'Replace manual, repetitive work with intelligent automation. Multi-step workflows, browser agents, data pipelines, email sequences — systems that run themselves.',
+    img: IMG.data,
   },
   {
     number: '04',
     title: 'AI Strategy',
     description: 'We map the opportunity, identify the highest-ROI use cases, build the roadmap, and give you a clear picture of cost and timeline before you commit.',
+    img: IMG.meeting,
   },
 ]
 
@@ -252,6 +266,34 @@ function App() {
         </Container>
       </section>
 
+      {/* Services — Featured layout with images */}
+      <section id="solutions" className="section">
+        <Container>
+          <motion.div {...fadeUp}>
+            <SectionLabel>Services</SectionLabel>
+            <SectionHeading>What We Do</SectionHeading>
+            <p className="section-intro">
+              Four core capabilities, each refined through real-world delivery across regulated industries, startups, and enterprise.
+            </p>
+          </motion.div>
+          <div className="services-featured">
+            {services.map((s, i) => (
+              <motion.div key={i} className="service-featured-card" {...stagger(i, 0.1)}>
+                <div className="service-featured-img">
+                  <img src={s.img} alt="" loading="lazy" />
+                  <div className="service-featured-img-overlay" />
+                  <span className="service-featured-num">{s.number}</span>
+                </div>
+                <div className="service-featured-body">
+                  <h3 className="service-featured-title">{s.title}</h3>
+                  <p className="service-featured-desc">{s.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       {/* Portfolio */}
       <section id="projects" className="section section--dark">
         <Container>
@@ -286,13 +328,17 @@ function App() {
         </Container>
       </section>
 
-      {/* Financial Markets */}
-      <section id="markets" className="section section--surface">
+      {/* Financial Markets — Hero image + grid */}
+      <section id="markets" className="section section--finance">
+        <div className="finance-hero-img" aria-hidden="true">
+          <img src={IMG.finance} alt="" loading="lazy" />
+          <div className="finance-hero-overlay" />
+        </div>
         <Container>
-          <motion.div className="text-center" {...fadeUp}>
+          <motion.div className="finance-header" {...fadeUp}>
             <SectionLabel>Core Speciality</SectionLabel>
             <SectionHeading>Built for Financial Markets</SectionHeading>
-            <p className="section-intro section-intro--center">
+            <p className="section-intro section-intro--onDark">
               Financial markets are our home ground. We build AI systems that trade, analyse, predict, and report — with the rigour regulated markets demand and the speed that gives you edge.
             </p>
           </motion.div>
@@ -314,34 +360,18 @@ function App() {
         </Container>
       </section>
 
-      {/* Services */}
-      <section id="solutions" className="section">
-        <Container>
-          <motion.div {...fadeUp}>
-            <SectionLabel>Services</SectionLabel>
-            <SectionHeading>What We Do</SectionHeading>
-          </motion.div>
-          <div className="services-list">
-            {services.map((s, i) => (
-              <motion.div key={i} className="service-row" {...stagger(i, 0.08)}>
-                <span className="service-num">{s.number}</span>
-                <div className="service-body">
-                  <h3 className="service-title">{s.title}</h3>
-                  <p className="service-desc">{s.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Use Cases */}
+      {/* Use Cases — Visual grid */}
       <section className="section section--surface">
         <Container>
-          <motion.div {...fadeUp}>
-            <SectionLabel>What We Build</SectionLabel>
-            <SectionHeading>If It Runs on AI, <span className="text-accent">We Build It</span></SectionHeading>
-          </motion.div>
+          <div className="usecase-header">
+            <motion.div {...fadeUp}>
+              <SectionLabel>What We Build</SectionLabel>
+              <SectionHeading>If It Runs on AI, <span className="text-accent">We Build It</span></SectionHeading>
+            </motion.div>
+            <motion.div className="usecase-header-img" {...fadeUp}>
+              <img src={IMG.server} alt="" loading="lazy" />
+            </motion.div>
+          </div>
           <div className="usecase-grid">
             {useCases.map((u, i) => (
               <motion.div key={i} className="usecase-card" {...stagger(i, 0.05)}>
@@ -368,27 +398,37 @@ function App() {
         </Container>
       </section>
 
-      {/* Process */}
+      {/* Process — Timeline */}
       <section id="work-with-us" className="section">
         <Container>
           <motion.div {...fadeUp}>
             <SectionLabel>How We Work</SectionLabel>
             <SectionHeading>From Idea to Live in Weeks</SectionHeading>
           </motion.div>
-          <div className="process-grid">
+          <div className="process-timeline">
             {processSteps.map((p, i) => (
-              <motion.div key={i} className="process-card" {...stagger(i, 0.08)}>
-                <span className="process-num">{p.n}</span>
-                <h3 className="process-title">{p.title}</h3>
-                <p className="process-desc">{p.desc}</p>
+              <motion.div key={i} className="process-step" {...stagger(i, 0.1)}>
+                <div className="process-step-marker">
+                  <span className="process-step-dot" />
+                  {i < processSteps.length - 1 && <span className="process-step-line" />}
+                </div>
+                <div className="process-step-content">
+                  <span className="process-step-num">{p.n}</span>
+                  <h3 className="process-step-title">{p.title}</h3>
+                  <p className="process-step-desc">{p.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </Container>
       </section>
 
-      {/* Mid CTA */}
+      {/* Mid CTA — with background image */}
       <section className="cta-band">
+        <div className="cta-band-bg" aria-hidden="true">
+          <img src={IMG.skyline} alt="" loading="lazy" />
+          <div className="cta-band-overlay" />
+        </div>
         <Container>
           <motion.div className="cta-band-inner" {...fadeUp}>
             <h2 className="cta-band-title">
@@ -402,16 +442,21 @@ function App() {
         </Container>
       </section>
 
-      {/* Local Business */}
+      {/* Local Business — with image */}
       <section id="local-business" className="section">
         <Container>
-          <motion.div {...fadeUp}>
-            <SectionLabel>For UK Local Businesses</SectionLabel>
-            <SectionHeading>Something on Your Website Is Costing You Customers.</SectionHeading>
-            <p className="section-intro" style={{ maxWidth: 720 }}>
-              Most local businesses we work with — dentists, gyms, roofers, electricians, salons — are losing 2 to 5 enquiries a week without knowing it. Slow site, not showing up on Google, no way to book out of hours. We audit your digital presence for free and tell you exactly what&apos;s happening. Then we fix it.
-            </p>
-          </motion.div>
+          <div className="localbiz-hero-row">
+            <motion.div className="localbiz-hero-text" {...fadeUp}>
+              <SectionLabel>For UK Local Businesses</SectionLabel>
+              <SectionHeading>Something on Your Website Is Costing You Customers.</SectionHeading>
+              <p className="section-intro" style={{ marginBottom: 0 }}>
+                Most local businesses we work with — dentists, gyms, roofers, electricians, salons — are losing 2 to 5 enquiries a week without knowing it. Slow site, not showing up on Google, no way to book out of hours. We audit your digital presence for free and tell you exactly what&apos;s happening. Then we fix it.
+              </p>
+            </motion.div>
+            <motion.div className="localbiz-hero-img" {...fadeUp}>
+              <img src={IMG.localShop} alt="" loading="lazy" />
+            </motion.div>
+          </div>
 
           <div className="localbiz-steps">
             {[
@@ -461,7 +506,7 @@ function App() {
               { title: 'Sector agnostic', desc: 'Proven solutions across compliance, learning & development, health & fitness, SaaS, and financial markets. If there\'s data and a problem, we can build the AI.' },
             ].map((w, i) => (
               <motion.div key={i} className="why-card" {...stagger(i, 0.08)}>
-                <div className="why-marker" />
+                <span className="why-num">0{i + 1}</span>
                 <h3 className="why-title">{w.title}</h3>
                 <p className="why-desc">{w.desc}</p>
               </motion.div>
@@ -498,8 +543,16 @@ function App() {
         </Container>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="section">
+      {/* Contact — with skyline bg */}
+      <section id="contact" className="section section--contact">
+        <div className="contact-bg" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1600&q=80"
+            alt=""
+            loading="lazy"
+          />
+          <div className="contact-bg-overlay" />
+        </div>
         <Container>
           <motion.div {...fadeUp}>
             <SectionLabel>Contact</SectionLabel>
