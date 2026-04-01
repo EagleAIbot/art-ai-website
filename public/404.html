@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <title>Shift AI Tech</title>
     <script>
-      // Redirect unknown GitHub Pages routes to index, preserving the path.
       (function () {
+        var base = '/shiftai/'
         var l = window.location
+        var path = l.pathname.startsWith(base) ? l.pathname.slice(base.length) : l.pathname.slice(1)
         var redirect = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-          '/?/' + l.pathname.slice(1).replace(/&/g, '~and~') +
+          base + '?/' + path.replace(/&/g, '~and~') +
           (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') + l.hash
         l.replace(redirect)
       })()
