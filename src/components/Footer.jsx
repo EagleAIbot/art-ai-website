@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="footer-brand">
             <Link to="/" className="footer-logo-link">
               <img
-                src="/shift-logo-new.png"
+                src={`${import.meta.env.BASE_URL}shift-logo-new.png`}
                 alt="Shift AI Tech"
                 className="footer-logo-img"
               />

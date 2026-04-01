@@ -206,7 +206,7 @@ function App() {
         <div className="hero-video-wrap" aria-hidden="true">
           <video
             className="hero-video"
-            src="/hero-bg.mp4"
+            src={`${import.meta.env.BASE_URL}hero-bg.mp4`}
             autoPlay
             muted
             loop

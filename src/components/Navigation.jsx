@@ -76,7 +76,7 @@ export default function Navigation() {
       <div className="nav-container">
         <Link to="/" className="nav-logo" aria-label="Shift AI Tech home">
           <img
-            src="/shift-logo-new.png"
+            src={`${import.meta.env.BASE_URL}shift-logo-new.png`}
             alt="Shift AI Tech"
             className="nav-logo-img"
           />
