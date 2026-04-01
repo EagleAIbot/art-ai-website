@@ -5,11 +5,9 @@
     <title>Shift AI Tech</title>
     <script>
       (function () {
-        var base = '/shiftai'
         var l = window.location
-        var path = l.pathname.startsWith(base) ? l.pathname.slice(base.length) : '/'
         var redirect = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-          base + '/?p=' + encodeURIComponent(path) + l.hash
+          '/?p=' + encodeURIComponent(l.pathname) + l.hash
         l.replace(redirect)
       })()
     </script>
